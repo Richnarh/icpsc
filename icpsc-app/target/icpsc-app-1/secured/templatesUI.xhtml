@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msg.title}</title>
+        <link href="#{application.contextPath}/vendors/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="#{application.contextPath}/vendors/css/metisMenu.min.css" rel="stylesheet"/>
+        <link href="#{application.contextPath}/vendors/css/timeline.css" rel="stylesheet"/>
+        <link href="#{application.contextPath}/vendors/css/startmin.css" rel="stylesheet"/>
+        <link href="#{application.contextPath}/vendors/css/morris.css" rel="stylesheet"/>
+        <link href="#{application.contextPath}/vendors/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+    </h:head>
+    <body>
+
+        <div id="wrapper">
+            <ui:include src="../secured/menu/app-menu.xhtml"/>
+
+            <div id="page-wrapper">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4 class="page-header">ICPSC</h4>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <p:messages globalOnly="true">
+                            <p:autoUpdate/>
+                        </p:messages>
+                        
+                        <ui:insert name="pageContent">
+                            ... Your content goes here ...
+                        </ui:insert>
+                    </div>
+                     
+                </div>
+            </div>
+
+        </div>
+
+        <script src="#{application.contextPath}/vendors/js/jquery.min.js"></script>
+        <script src="#{application.contextPath}/vendors/js/bootstrap.min.js"></script>
+        <script src="#{application.contextPath}/vendors/js/metisMenu.min.js"></script>
+        <script src="#{application.contextPath}/vendors/js/startmin.js"></script>
+    </body>
+</html>
+
