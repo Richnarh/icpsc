@@ -5,11 +5,10 @@
  */
 package com.khoders.icpsc.app.entities;
 
+import com.khoders.resource.utilities.SystemUtils;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
@@ -22,7 +21,7 @@ import javax.persistence.Table;
 public class Customer extends UserAccountRecord implements Serializable
 {
     @Column(name = "customer_id")
-    private String clientId;
+    private String customerId;
 
     @Column(name = "customer_name")
     private String customerName;
@@ -37,16 +36,16 @@ public class Customer extends UserAccountRecord implements Serializable
     @Lob
     private String description;    
 
-    public String getClientId()
+    public String getCustomerId()
     {
-        return clientId;
+        return customerId;
     }
 
-    public void setClientId(String clientId)
+    public void setCustomerId(String customerId)
     {
-        this.clientId = clientId;
+        this.customerId = customerId;
     }
-
+    
     public String getCustomerName()
     {
         return customerName;
@@ -86,7 +85,16 @@ public class Customer extends UserAccountRecord implements Serializable
     {
         this.description = description;
     }
-
+    public void genCode()
+    {
+        if (getCustomerId() != null)
+        {
+            setCustomerId(getCustomerId());
+        } else
+        {
+            setCustomerId(SystemUtils.generateCode());
+        }
+    }
     @Override
     public String toString()
     {

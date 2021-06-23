@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">  
+
+    <h:body>
+        <ui:composition template="../templatesUI.xhtml">
+            <ui:define name="pageTitle">
+                 Branch
+            </ui:define>
+
+            <ui:define name="pageContent">
+                <div class="card">
+                    <h5 class="card-header">Branch setup</h5>
+                    <div class="card-body">
+                        <h:form id="branchForm">
+                            <h:panelGrid columns="4" class="spaced-form">
+                                <span>#{msg.branch_code}</span>
+                                <p:inputText value="#{branchController.branch.branchCode}"/>
+
+                                <span>#{msg.profile}</span>
+                                <p:selectOneMenu class="col" value="#{branchController.branch.profile}" required="true">
+                                    <f:selectItem itemLabel="#{msg.choose}"/>
+                                    <f:selectItems value="#{userCommonClazz.profileList}"/>
+                                </p:selectOneMenu>
+                                
+                                <span>#{msg.branch_name}</span>
+                                <p:inputText value="#{branchController.branch.branchName}"/>
+                                
+                                <span>#{msg.box_address}</span>
+                                <p:inputText value="#{branchController.branch.boxAddress}"/>
+
+                                <span>#{msg.gps_address}</span>
+                                <p:inputText value="#{branchController.branch.gpsAddress}"/>
+
+                                <span>#{msg.telephone_no}</span>
+                                <p:inputText value="#{branchController.branch.telephoneNo}"/>
+
+                        </h:panelGrid>
+                            <div class="py-3">
+                                <p:commandButton class="kbtn-success mr-3" value="#{branchController.optionText}" update="@form, :branchTable" action="#{branchController.saveBranch()}"/>
+                                <p:commandButton class="kbtn-cancel" value="#{msg.clear}" update="@form" immediate="true" action="#{branchController.clearBranch()}"/>
+                                </div>
+                        </h:form>
+                        <h:form id="branchTable">
+                            
+                            <p:dataTable value="#{branchController.branchList}" var="branch">
+                                <p:column style="width: 37px;">
+                                    <p:rowToggler/>
+                                </p:column>
+                                <p:rowExpansion>
+                                    <h:panelGrid columns="2">
+                                        <span>#{msg.created_date}</span>
+                                        <h:outputText value="#{branch.createdDate}">
+                                            <f:convertDateTime type="localDate" pattern="#{msg.formatted_date}"/>
+                                        </h:outputText>
+                                    </h:panelGrid>
+                                </p:rowExpansion>
+                                
+                                <p:column headerText="#{msg.branch_code}">
+                                    #{branch.branchCode}
+                                </p:column>
+                                <p:column headerText="#{msg.branch_name}">
+                                    #{branch.branchName}
+                                </p:column>
+                                <p:column headerText="#{msg.profile}">
+                                    #{branch.profile}
+                                </p:column>
+                                <p:column headerText="#{msg.gps_address}">
+                                    #{branch.gpsAddress}
+                                </p:column>
+                                <p:column headerText="#{msg.box_address}">
+                                    #{branch.boxAddress}
+                                </p:column>
+                                <p:column headerText="#{msg.telephone_no}">
+                                    #{branch.telephoneNo}
+                                </p:column>
+                                
+                                <p:column headerText="#{msg.action}" style="width: 80px;">
+                                    <p:commandButton class="kbtn-info" value="#{msg.edit}" action="#{branchController.editBranch(branch)}" immediate="true" update=":branchForm"/>
+                                </p:column>
+                                <p:column headerText="#{msg.action}" style="width: 100px;">
+                                    <p:commandButton class="kbtn-danger" value="#{msg.delete}" action="#{branchController.deleteBranch(branch)}" update="@form"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

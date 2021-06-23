@@ -39,6 +39,9 @@ public class Cart extends UserAccountRecord implements Serializable{
     
     @Column(name = "profit")
     private double profit;
+    
+    @Column(name = "total_amount")
+    private double totalAmount;
 
     @JoinColumn(name = "customer")
     @ManyToOne
@@ -113,6 +116,16 @@ public class Cart extends UserAccountRecord implements Serializable{
 
     public void setCartId(String cartId) {
         this.cartId = cartId;
+    }
+
+    public double getTotalAmount()
+    {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(double totalAmount)
+    {
+        this.totalAmount = totalAmount;
     }
     
 }

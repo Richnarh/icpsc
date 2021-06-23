@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.app.services;
 
-import com.khoders.icpsc.app.entities.UserAccount;
+import com.khoders.icpsc.entities.UserAccount;
 import com.khoders.icpsc.app.jooq.UserModel;
 import com.khoders.resource.jpa.CrudApi;
 import static com.khoders.resource.utilities.SecurityUtil.hashText;

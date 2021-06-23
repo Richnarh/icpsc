@@ -5,6 +5,7 @@
  */
 package com.khoders.icpsc.app.entities;
 
+import com.khoders.icpsc.entities.UserAccount;
 import com.khoders.resource.jpa.BaseModel;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,6 +31,4 @@ public class UserAccountRecord extends BaseModel
     {
         this.userAccount = userAccount;
     }
-    
-    
 }

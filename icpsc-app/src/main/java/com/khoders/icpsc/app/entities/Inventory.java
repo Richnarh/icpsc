@@ -6,10 +6,9 @@
 package com.khoders.icpsc.app.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,48 +16,20 @@ import javax.persistence.Table;
  * @author richa
  */
 @Entity
-@Table(name = "inventory_item")
-public class Inventory extends UserAccountRecord implements Serializable
+@Table(name = "inventory")
+public class Inventory extends OrderRecords implements Serializable
 {
-    @Column(name="inventory_id")
-    private String inventoryId;
-    
-    @JoinColumn(name = "product", referencedColumnName = "id")
-    @ManyToOne
-    private Product product;
-    
-    @Column(name = "total_amount")
-    private double totalAmount;
+    @Column(name="posted_date")
+    private LocalDate postedDate = LocalDate.now();
 
-    public String getInventoryId()
+    public LocalDate getPostedDate()
     {
-        return inventoryId;
+        return postedDate;
     }
 
-    public void setInventoryId(String inventoryId)
+    public void setPostedDate(LocalDate postedDate)
     {
-        this.inventoryId = inventoryId;
+        this.postedDate = postedDate;
     }
-
-    public Product getProduct()
-    {
-        return product;
-    }
-
-    public void setProduct(Product product)
-    {
-        this.product = product;
-    }
-
-    public double getTotalAmount()
-    {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(double totalAmount)
-    {
-        this.totalAmount = totalAmount;
-    }
-    
     
 }

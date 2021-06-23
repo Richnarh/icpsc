@@ -7,7 +7,7 @@ package com.khoders.icpsc.app.jooq;
 
 
 import com.khoders.icpsc.app.Pages;
-import com.khoders.icpsc.app.entities.UserAccount;
+import com.khoders.icpsc.entities.UserAccount;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.UserAccountService;
 import com.khoders.resource.utilities.Msg;

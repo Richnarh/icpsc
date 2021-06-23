@@ -8,7 +8,9 @@ package com.khoders.icpsc.app.entities;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,15 +21,18 @@ import javax.persistence.Table;
 @Table(name = "product")
 public class Product extends UserAccountRecord implements Serializable
 {
-    @Column(name = "product_code")
-    private String productCode;
+    @Column(name = "product_id")
+    private String productId;
     
-    public static final String _productName = "productName";
     @Column(name = "product_name")
     private String productName;
     
     @Column(name = "product_location")
     private String productLocation;
+    
+    @JoinColumn(name = "item_type")
+    @ManyToOne
+    private ItemType itemType;
     
     @Lob
     @Column(name = "description")
@@ -42,16 +47,16 @@ public class Product extends UserAccountRecord implements Serializable
     @Column(name = "route")
     private String route;
 
-    public String getProductCode()
+    public String getProductId()
     {
-        return productCode;
+        return productId;
     }
 
-    public void setProductCode(String productCode)
+    public void setProductId(String productId)
     {
-        this.productCode = productCode;
+        this.productId = productId;
     }
-
+    
     public String getProductName()
     {
         return productName;
@@ -112,4 +117,21 @@ public class Product extends UserAccountRecord implements Serializable
         this.route = route;
     }
 
+    public ItemType getItemType()
+    {
+        return itemType;
+    }
+
+    public void setItemType(ItemType itemType)
+    {
+        this.itemType = itemType;
+    }
+
+    @Override
+    public String toString()
+    {
+        return productName;
+    }
+
+    
 }

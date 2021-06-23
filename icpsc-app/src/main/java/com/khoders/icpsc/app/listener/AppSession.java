@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.app.listener;
 
-import com.khoders.icpsc.app.entities.UserAccount;
+import com.khoders.icpsc.entities.UserAccount;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
