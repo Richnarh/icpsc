@@ -6,21 +6,21 @@
 package com.khoders.icpsc.app.entities;
 
 import com.khoders.resource.enums.Months;
+import com.khoders.resource.enums.UnitOfMeasurement;
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
  *
  * @author richa
  */
-@Entity
-@Table(name = "inventory_item")
+
 public class InventoryItem extends UserAccountRecord implements Serializable
 {
     @Column(name = "order_item_id")
@@ -53,6 +53,12 @@ public class InventoryItem extends UserAccountRecord implements Serializable
     @Column(name = "expiry_date")
     private String expiryDate;
     
+    @Column(name = "potency_value")
+    private int potencyValue;
+    
+    @Column(name = "unit")
+    @Enumerated(EnumType.STRING)
+    private UnitOfMeasurement unit;
     
     @Transient
     private Months expiryMonth;
@@ -173,9 +179,29 @@ public class InventoryItem extends UserAccountRecord implements Serializable
     {
         this.inventory = inventory;
     }
+
+    public int getPotencyValue()
+    {
+        return potencyValue;
+    }
+
+    public void setPotencyValue(int potencyValue)
+    {
+        this.potencyValue = potencyValue;
+    }
+
+    public UnitOfMeasurement getUnit()
+    {
+        return unit;
+    }
+
+    public void setUnit(UnitOfMeasurement unit)
+    {
+        this.unit = unit;
+    }
     
     @Override
     public String toString() {
-        return product+"";
+        return product+" "+potencyValue+" "+unit;
     }
 }

@@ -73,7 +73,14 @@ public class Category extends UserAccountRecord implements Serializable{
     
     public void genCode()
     {
-        setCategoryCode(SystemUtils.generateCode());
+        if(getCategoryCode()!= null)
+        {
+           setCategoryCode(getCategoryCode());
+        }
+        else
+        {
+            setCategoryCode(SystemUtils.generateCode());
+        }
     }
 
     @Override

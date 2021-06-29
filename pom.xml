@@ -33,7 +33,7 @@
     <module>icpsc-entities</module>
         
     <module>icpsc-admin</module>
-      
+    <module>ams</module>
   </modules>
   
 </project>

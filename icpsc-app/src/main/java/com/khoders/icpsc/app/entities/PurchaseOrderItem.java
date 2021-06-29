@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class PurchaseOrderItem extends UserAccountRecord implements Serializable
 {
     @Column(name = "order_item_code")
-    private String orderItemCode = SystemUtils.generateCode();
+    private String orderItemCode;
     
     @JoinColumn(name = "purchase_order", referencedColumnName = "id")
     @ManyToOne
@@ -86,5 +86,17 @@ public class PurchaseOrderItem extends UserAccountRecord implements Serializable
     public void setProduct(Product product)
     {
         this.product = product;
+    }
+    
+    public void genCode()
+    {
+        if(getOrderItemCode()!= null)
+        {
+           setOrderItemCode(getOrderItemCode());
+        }
+        else
+        {
+            setOrderItemCode(SystemUtils.generateCode());
+        }
     }
 }

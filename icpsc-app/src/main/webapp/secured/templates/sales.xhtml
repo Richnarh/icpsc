@@ -9,11 +9,101 @@
     <h:body>
         <ui:composition template="../templatesUI.xhtml">
             <ui:define name="pageTitle">
-                SALES
+                <div class="top-title">
+                    <a class="text-info mb-5" href="#{application.contextPath}/#{msg.entry}/index.xhtml">Dashboard</a>/Sales Log
+                </div>
             </ui:define>
-
             <ui:define name="pageContent">
-                <h1>SALES</h1>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <h:form id="receiptTable">
+                                <h:panelGrid class="mb-2" columns="2" style="padding: 0px;">
+                                     <span>From: </span>
+                                     <p:datePicker value="#{salesLogController.dateRange.fromDate}"
+                                                  pattern="#{msg.formatted_date}" 
+                                                  monthNavigator="true" yearNavigator="true" />
+
+                                    <span>To:</span>
+                                    <p:datePicker value="#{salesLogController.dateRange.toDate}"
+                                                  pattern="#{msg.formatted_date}" 
+                                                  monthNavigator="true" yearNavigator="true" />
+                                </h:panelGrid>
+                                                                
+                                <p:commandButton class="kbtn-secondary btn-block" update="@form, searchTable"
+                                                     action="#{salesLogController.fetchSummary()}"
+                                                     value="#{msg.search}" />
+                                    
+                                  
+                                <p:dataTable id="searchTable" value="#{salesLogController.salesCatalogueList}" var="salesLog" paginator="true" paginatorPosition="bottom" rows="14">
+                                    <p:column headerText="#{msg.receipt_no}" filterBy="#{salesLog.receiptNumber}" filterMatchMode="contains">
+                                        <h:commandLink class="text-info" value="#{salesLog.receiptNumber} - (GHS #{salesLog.totalAmount})" 
+                                                       action="#{salesLogController.manageSalesLog(salesLog)}">
+                                            <p:ajax update=":salesLogTable"/>
+                                        </h:commandLink>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+                        </div>
+
+                        <div class="col-md-9">
+                            <h:form id="salesLogTable">
+                                <div class="card">
+                                    <h5 class="card-header bg-blue-sky">
+                                        S A L E S 
+                                        <span>
+                                            <h:commandButton class="btn btn-sm btn-info mx-2" value="#{msg.reset}" action="#{salesLogController.resetPage()}">
+                                                <p:ajax update="@form, :receiptTable"/>
+                                            </h:commandButton>
+                                            
+                                            <h:commandButton class="btn btn-sm btn-info" value="Run Profit" action="#{salesLogController.profitPerMonth()}">
+                                                <p:ajax update="@form"/>
+                                            </h:commandButton>
+                                            
+                                            
+                                        </span>
+                                    </h5>
+                                    <div class="card-body">
+                                        <p:dataTable value="#{salesLogController.cartList}" var="cartItem" paginator="true" paginatorPosition="bottom" rows="14">
+                                            <p:column headerText="#{msg.purchase_date}">
+                                                <h:outputText value="#{cartItem.createdDate}">
+                                                    <f:convertDateTime pattern="#{msg.formatted_date}" type="localDate"/>
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="#{msg.product}">
+                                                #{cartItem.inventory.product.productName}
+                                            </p:column>
+                                            <p:column headerText="#{msg.selling_price}" class="text-right">
+                                                <h:outputText value="#{cartItem.sellingPrice}">
+                                                    <f:convertNumber pattern="#{msg.money_pattern}"/>
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="#{msg.quantity}" class="text-right">
+                                                #{cartItem.quantity}
+                                            </p:column>
+                                            <p:column headerText="#{msg.total_amount}" class="text-right">
+                                                <h:outputText value="#{cartItem.totalAmount}">
+                                                    <f:convertNumber pattern="#{msg.money_pattern}"/>
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="#{msg.profit}" class="text-right">
+                                                <h:outputText value="#{cartItem.profit}">
+                                                    <f:convertNumber pattern="#{msg.money_pattern}"/>
+                                                </h:outputText>
+                                            </p:column>
+                                        </p:dataTable>
+                                          
+                                        <div class="display-box">
+                                            <h:outputText class="text-right" style="font-size: 15px;" value="Profit for the searched period: #{salesLogController.totalProfitSum}">
+                                                    <f:convertNumber pattern="#{msg.money_pattern}"/>
+                                                </h:outputText>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>

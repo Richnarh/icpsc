@@ -13,7 +13,65 @@
             </ui:define>
 
             <ui:define name="pageContent">
-                <h1>POS</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card callout-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa fa-shopping-basket"></i>
+                                    S T O C K
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <h:form>
+                                    <p:dataTable value="#{posController.inventoryList}" var="inventory" scrollable="true" scrollHeight="400">
+                                        <p:column headerText="Product Id" filterBy="#{inventoryItem.product.productId}" filterMatchMode="contains">
+                                            <h:outputText value="#{inventory.product.productId}"/>
+                                        </p:column>
+                                        <p:column headerText="Product Name" filterBy="#{inventory.product.productName}" filterMatchMode="contains">
+                                            <p:commandLink class="ptext-link" value="#{inventory.product.productName}" action="#{posController.selectProduct(inventory.inventory)}" update=":cartTable"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card callout-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa fa-shopping-bag"></i>
+                                    C A R T
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <h:form id="cartTable">
+                                    <p:dataTable value="#{posController.cartList}" var="cart" scrollable="true" scrollHeight="400">
+                                        <p:column headerText="#{msg.product}">
+                                            <p:inputText value="#{cart.product}" style="width: 140px"/>
+                                        </p:column>
+                                        
+                                        <p:column headerText="#{msg.quantity}">
+                                            <p:inputText value="#{cart.quantity}" style="width: 140px"/>
+                                        </p:column>
+                                        
+                                        <p:column headerText="#{msg.unit_price}">
+                                            <p:inputText value="#{cart.unitPrice}" style="width: 140px"/>
+                                        </p:column>
+                                        
+                                        <p:column headerText="Total" style="width: 90px">
+                                            <h:outputText value="#{cart.total}"/>
+                                        </p:column>
+                                        
+                                        <p:column headerText="#{msg.action}" style="width: 65px">
+                                            <p:commandButton icon="#{msg.delete_icon}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>

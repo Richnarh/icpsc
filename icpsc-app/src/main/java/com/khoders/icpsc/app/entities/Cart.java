@@ -22,17 +22,13 @@ import javax.persistence.Table;
 public class Cart extends UserAccountRecord implements Serializable{
     
     @Column(name = "cart_id")
-    private String cartId = SystemUtils.generateCode();
+    private String cartId;
 
-    @JoinColumn(name = "inventory")
-    @ManyToOne
-    private Inventory inventory;
-    
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "selling_price")
-    private double sellingPrice;
+    @Column(name = "unit_price")
+    private double unitPrice;
 
     @Column(name = "cost_price")
     private double costPrice;
@@ -40,24 +36,20 @@ public class Cart extends UserAccountRecord implements Serializable{
     @Column(name = "profit")
     private double profit;
     
-    @Column(name = "total_amount")
-    private double totalAmount;
+    @Column(name = "total")
+    private double total;
 
     @JoinColumn(name = "customer")
     @ManyToOne
     private Customer customer;
 
+    @JoinColumn(name = "product")
+    @ManyToOne
+    private Product product;
+
     @Column(name = "description")
     private String description;
     
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -66,14 +58,16 @@ public class Cart extends UserAccountRecord implements Serializable{
         this.quantity = quantity;
     }
 
-    public double getSellingPrice() {
-        return sellingPrice;
+    public double getUnitPrice()
+    {
+        return unitPrice;
     }
 
-    public void setSellingPrice(double sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setUnitPrice(double unitPrice)
+    {
+        this.unitPrice = unitPrice;
     }
-
+    
     public double getCostPrice() {
         return costPrice;
     }
@@ -118,14 +112,36 @@ public class Cart extends UserAccountRecord implements Serializable{
         this.cartId = cartId;
     }
 
-    public double getTotalAmount()
+    public double getTotal()
     {
-        return totalAmount;
+        return total;
     }
 
-    public void setTotalAmount(double totalAmount)
+    public void setTotal(double total)
     {
-        this.totalAmount = totalAmount;
+        this.total = total;
+    }
+
+    public Product getProduct()
+    {
+        return product;
+    }
+
+    public void setProduct(Product product)
+    {
+        this.product = product;
     }
     
+    
+    public void genCode()
+    {
+        if(getCartId()!= null)
+        {
+           setCartId(getCartId());
+        }
+        else
+        {
+            setCartId(SystemUtils.generateCode());
+        }
+    }
 }

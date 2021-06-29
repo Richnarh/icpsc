@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @Table(name = "sales_catalogue")
 public class SalesCatalogue extends BaseModel implements Serializable{
     @Column(name = "catalogue_Id")
-    private String catalogueId = SystemUtils.generateCode();
+    private String catalogueId;
     
     @Column(name = "purchase_date")
     private LocalDate purchaseDate;
@@ -145,5 +145,15 @@ public class SalesCatalogue extends BaseModel implements Serializable{
     public void setCatalogueId(String catalogueId) {
         this.catalogueId = catalogueId;
     }
-
+   public void genCode()
+    {
+        if(getCatalogueId()!= null)
+        {
+           setCatalogueId(getCatalogueId());
+        }
+        else
+        {
+            setCatalogueId(SystemUtils.generateCode());
+        }
+    }
 }

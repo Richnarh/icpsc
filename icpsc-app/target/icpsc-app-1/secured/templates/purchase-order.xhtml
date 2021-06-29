@@ -61,8 +61,8 @@
                                             </h:outputText>
                                         </p:column>
 
-                                        <p:column headerText="Order code" filterBy="#{purchaseOrder.purchaseOrderCode}" filterMatchMode="contains">
-                                            #{purchaseOrder.purchaseOrderCode}
+                                        <p:column headerText="Order code" filterBy="#{purchaseOrder.orderId}" filterMatchMode="contains">
+                                            #{purchaseOrder.orderId}
                                         </p:column>
 
                                         <p:column headerText="#{msg.batch_number}">
@@ -87,7 +87,6 @@
                                             <p:menuitem rendered="#{appSession.currentUser.permDelete == true}" icon="fa fa-remove" class="text-danger" value="#{msg.delete}" action="#{purchaseOrderController.deletePurchaseOrder(purchaseOrder)}" immediate="true"  update=":mainPanel"/>
                                             </p:menuButton>
                                         </p:column>
-
                                     </p:dataTable>
                                 </h:form>
                             </h:panelGroup>
@@ -123,7 +122,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-4 col-form-label">#{msg.customer}</label>
                                                 <div class="col-md-8">
-                                                    <p:selectOneMenu class="col" value="#{purchaseOrderController.purchaseOrder.customer}" required="true">
+                                                    <p:selectOneMenu class="col" value="#{purchaseOrderController.purchaseOrder.customer}">
                                                         <f:selectItem itemLabel="#{msg.choose}"/>
                                                         <f:selectItems value="#{usercommonBeans.customerList}"/>
                                                     </p:selectOneMenu>

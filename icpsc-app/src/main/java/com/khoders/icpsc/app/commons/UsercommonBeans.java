@@ -38,6 +38,7 @@ public class UsercommonBeans implements Serializable
     {
        customerList = inventoryService.getCustomerList();
        productList = inventoryService.getProductList();
+       itemtypeList = inventoryService.getItemTypeList();
     }
 
     public List<ItemType> getItemtypeList()
@@ -54,6 +55,5 @@ public class UsercommonBeans implements Serializable
     {
         return productList;
     }
-    
     
 }

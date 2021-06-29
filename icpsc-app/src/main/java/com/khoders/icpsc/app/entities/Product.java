@@ -5,6 +5,7 @@
  */
 package com.khoders.icpsc.app.entities;
 
+import com.khoders.resource.utilities.SystemUtils;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -125,6 +126,18 @@ public class Product extends UserAccountRecord implements Serializable
     public void setItemType(ItemType itemType)
     {
         this.itemType = itemType;
+    }
+    
+    public void genCode()
+    {
+        if(getProductId()!= null)
+        {
+           setProductId(getProductId());
+        }
+        else
+        {
+            setProductId(SystemUtils.generateCode());
+        }
     }
 
     @Override

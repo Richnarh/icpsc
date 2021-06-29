@@ -7,6 +7,8 @@ package com.khoders.icpsc.app.services;
 
 import com.khoders.icpsc.app.entities.Customer;
 import com.khoders.icpsc.app.entities.Inventory;
+import com.khoders.icpsc.app.entities.InventoryItem;
+import com.khoders.icpsc.app.entities.ItemType;
 import com.khoders.icpsc.app.entities.Product;
 import com.khoders.icpsc.app.entities.PurchaseOrder;
 import com.khoders.icpsc.app.entities.PurchaseOrderItem;
@@ -96,6 +98,22 @@ public class InventoryService
         return Collections.emptyList();
     }
     
+    public List<InventoryItem> getInventoryItemList()
+    {
+        try
+        {
+           TypedQuery<InventoryItem> typedQuery = crudApi.getEm().createQuery("SELECT e FROM InventoryItem e WHERE  e.userAccount=?1", InventoryItem.class);
+                            typedQuery.setParameter(1, appSession.getCurrentUser());
+                            
+                            return  typedQuery.getResultList();
+           
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
+    
     public List<Customer> getCustomerList()
     {
         try
@@ -110,6 +128,39 @@ public class InventoryService
             e.printStackTrace();
         }
 
+        return Collections.emptyList();
+    }
+    
+    public List<ItemType> getItemTypeList()
+    {
+        try
+        {
+            String qryString = "SELECT e FROM ItemType e WHERE e.userAccount=?1";
+            TypedQuery<ItemType> typedQuery = crudApi.getEm().createQuery(qryString, ItemType.class);
+                                typedQuery.setParameter(1, appSession.getCurrentUser());
+                            return typedQuery.getResultList();
+            
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return Collections.emptyList();
+    }
+    
+    public List<Inventory> getShortageList()
+    {
+        String qryString = "SELECT e FROM Inventory e WHERE e.userAccount=?1 AND e.quantity <= 5";
+        try {
+            
+            TypedQuery<Inventory> typedQuery = crudApi.getEm().createQuery(qryString, Inventory.class);
+               typedQuery.setParameter(1, appSession.getCurrentUser());
+               
+               return typedQuery.getResultList();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return Collections.emptyList();
     }
 }

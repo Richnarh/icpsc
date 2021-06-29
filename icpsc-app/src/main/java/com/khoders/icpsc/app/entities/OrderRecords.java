@@ -8,8 +8,7 @@ package com.khoders.icpsc.app.entities;
 import com.khoders.resource.utilities.SystemUtils;
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -20,7 +19,7 @@ import javax.persistence.MappedSuperclass;
 public class OrderRecords extends UserAccountRecord implements Serializable
 {
     @Column(name = "order_id")
-    private String orderId = SystemUtils.generateId();
+    private String orderId;
 
     @Column(name = "total_amount")
     private double totalAmount;
@@ -29,6 +28,7 @@ public class OrderRecords extends UserAccountRecord implements Serializable
     private String batchNumber;
     
     @Column(name = "description")
+    @Lob
     private String description;
 
     public String getOrderId()
@@ -71,5 +71,15 @@ public class OrderRecords extends UserAccountRecord implements Serializable
         this.description = description;
     }
     
-    
+   public void genCode()
+    {
+        if(getOrderId()!= null)
+        {
+           setOrderId(getOrderId());
+        }
+        else
+        {
+            setOrderId(SystemUtils.generateCode());
+        }
+    }
 }
