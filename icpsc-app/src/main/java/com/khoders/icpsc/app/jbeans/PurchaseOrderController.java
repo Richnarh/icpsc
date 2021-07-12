@@ -5,6 +5,7 @@
  */
 package com.khoders.icpsc.app.jbeans;
 
+import com.khoders.icpsc.app.entities.Inventory;
 import com.khoders.icpsc.app.entities.InventoryItem;
 import com.khoders.icpsc.app.entities.PurchaseOrder;
 import com.khoders.icpsc.app.entities.PurchaseOrderItem;
@@ -171,15 +172,13 @@ public class PurchaseOrderController implements Serializable
         {
             for (PurchaseOrderItem orderItem : purchaseOrderItemList)
             {
-
-                if (totalAmount != purchaseOrder.getTotalAmount())
-                {
-                    FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("The item total sum: " + (totalAmount) + " is not equivalent to the purchase order total: " + purchaseOrder.getTotalAmount()), null));
-                        return;
-                }
+//                if (totalAmount != purchaseOrder.getTotalAmount())
+//                {
+//                    FacesContext.getCurrentInstance().addMessage(null,
+//                            new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("The item total sum: " + (totalAmount) + " is not equivalent to the purchase order total: " + purchaseOrder.getTotalAmount()), null));
+//                        return;
+//                }
                 crudApi.save(orderItem);
-
             }
 
             for (PurchaseOrderItem orderItem : removedOrderItemList)
@@ -235,25 +234,36 @@ public class PurchaseOrderController implements Serializable
                 itemCost += (items.getQuantity() * items.getUnitPrice());
             }
             
-             if(purchaseOrder.getTotalAmount() != itemCost)
-             {
-                 FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("The total cost of items is different from the entered total amount."), null));  
-                 return; 
-             }
+//             if(purchaseOrder.getTotalAmount() != itemCost)
+//             {
+//                 FacesContext.getCurrentInstance().addMessage(null,
+//                        new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("The total cost of items is different from the entered total amount."), null));  
+//                 return; 
+//             }
              
             for (PurchaseOrderItem item : orderItemList)
             {
-                inventoryItem = new InventoryItem();
-                inventoryItem.setOrderItemId(purchaseOrder.getOrderId());
-                inventoryItem.setProduct(item.getProduct());
-                inventoryItem.setDescription(purchaseOrder.getDescription());
-                inventoryItem.setQuantity(item.getQuantity());
-                inventoryItem.setUnitPrice(item.getUnitPrice());
-                inventoryItem.setUserAccount(appSession.getCurrentUser());
+                Inventory inventory = new Inventory();
+                inventory.setOrderId(purchaseOrder.getOrderId());
+                inventory.setPostedDate(purchaseOrder.getReceivedDate());
+                inventory.setTotalAmount(purchaseOrder.getTotalAmount());
+                inventory.setBatchNumber(purchaseOrder.getBatchNumber());
+                inventory.setDescription(purchaseOrder.getDescription());
+                
+                if(crudApi.save(inventory) != null)
+                {
+                    inventoryItem = new InventoryItem();
+                    inventoryItem.setOrderItemId(item.getOrderItemCode());
+                    inventoryItem.setTotalPrice(itemCost);
+                    inventoryItem.setProduct(item.getProduct());
+                    inventoryItem.setDescription(purchaseOrder.getDescription());
+                    inventoryItem.setQuantity(item.getQuantity());
+                    inventoryItem.setUnitPrice(item.getUnitPrice());
+                    inventoryItem.setUserAccount(appSession.getCurrentUser());
 
-                crudApi.save(inventoryItem);
-            
+                    crudApi.save(inventoryItem);  
+                }
+                
             }
             
         if(inventoryItem != null)

@@ -37,7 +37,7 @@ public class SmsService
     {
         try
         {
-            String qryString = "SELECT e FROM Customer e WHERE e.userAccount=?1 ORDER BY e.clientName ASC";
+            String qryString = "SELECT e FROM Customer e WHERE e.userAccount=?1 ORDER BY e.customerName ASC";
             TypedQuery<Customer> typedQuery = crudApi.getEm().createQuery(qryString, Customer.class);
                                typedQuery.setParameter(1, appSession.getCurrentUser());
                          return typedQuery.getResultList();

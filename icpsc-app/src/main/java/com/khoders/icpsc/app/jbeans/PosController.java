@@ -13,11 +13,14 @@ import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.icpsc.app.services.PosService;
 import com.khoders.resource.jpa.CrudApi;
+import com.khoders.resource.utilities.Msg;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -36,38 +39,84 @@ public class PosController implements Serializable
     
     private Inventory selectedInventory = null;
     private List<Cart> cartList = new LinkedList<>();
-    private List<Inventory> inventoryList = new LinkedList<>();
+    private Cart cart = new Cart();
+    private List<InventoryItem> inventoryItemList = new LinkedList<>();
+    
+    private double totalAmount=0.0;
     
     @PostConstruct
     private void init()
     {
-        inventoryList = inventoryService.getInventoryList();
+        clear();
+        inventoryItemList = inventoryService.getInventoryItemList();
     }
     
     public void selectProduct(Product product)
     {
-        List<Inventory> inventorySalesList = new LinkedList<>();
+        List<InventoryItem> inventorySalesList = new LinkedList<>();
         
         inventorySalesList = posService.getInventoryProduct(product);
         
-        for (Inventory item : inventorySalesList)
+        
+        for (InventoryItem item : inventorySalesList)
         {
-            Cart cart = new Cart();
+            cart = new Cart();
             cart.setProduct(item.getProduct());
             cart.setUnitPrice(item.getUnitPrice());
             cart.setQuantity(item.getQuantity());
             cart.setTotal(item.getUnitPrice() * item.getQuantity());
             cartList.add(cart);
+            
         }
         
+//        totalAmount+=cart.getTotal();
     }
     
     public void saveCart()
     {
-        cartList.forEach(cart->{
-            cart.genCode();
-           crudApi.save(cart);
-        });
+        if (!cartList.isEmpty())
+        {
+            cartList.forEach(cart ->
+            {
+                cart.genCode();
+                crudApi.save(cart);
+            });
+            
+            FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO, Msg.setMsg("Cart saved successfully!"), null));
+        }
+    }
+        
+    public void clear()
+    {
+        cartList = new LinkedList<>();
+        totalAmount = 0.0;
+    }
+        
+    
+    public void removeFromCart(Cart cart)
+    {
+        System.out.println("Before total amount => "+totalAmount);
+        
+        totalAmount -= (cart.getQuantity() * cart.getUnitPrice());
+        cartList.remove(cart);
+        
+        
+        System.out.println("\n\n");
+        
+        System.out.println("After total amount => "+totalAmount);
+    }
+    
+    public void processCart()
+    {
+        totalAmount=0.0;
+        if (!cartList.isEmpty())
+        {
+            cartList.forEach(cart ->
+            {
+                totalAmount += cart.getTotal();
+            });
+        }
     }
 
     public List<Cart> getCartList()
@@ -75,9 +124,14 @@ public class PosController implements Serializable
         return cartList;
     }
 
-    public List<Inventory> getInventoryList()
+    public List<InventoryItem> getInventoryItemList()
     {
-        return inventoryList;
+        return inventoryItemList;
+    }
+
+    public double getTotalAmount()
+    {
+        return totalAmount;
     }
 
 }

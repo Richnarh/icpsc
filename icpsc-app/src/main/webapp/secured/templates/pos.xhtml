@@ -24,12 +24,9 @@
                             </div>
                             <div class="card-body">
                                 <h:form>
-                                    <p:dataTable value="#{posController.inventoryList}" var="inventory" scrollable="true" scrollHeight="400">
-                                        <p:column headerText="Product Id" filterBy="#{inventoryItem.product.productId}" filterMatchMode="contains">
-                                            <h:outputText value="#{inventory.product.productId}"/>
-                                        </p:column>
-                                        <p:column headerText="Product Name" filterBy="#{inventory.product.productName}" filterMatchMode="contains">
-                                            <p:commandLink class="ptext-link" value="#{inventory.product.productName}" action="#{posController.selectProduct(inventory.inventory)}" update=":cartTable"/>
+                                    <p:dataTable value="#{posController.inventoryItemList}" var="stock" scrollable="true" scrollHeight="400">
+                                        <p:column class="text-center" headerText="Product" filterBy="#{stock.product.productName}" filterMatchMode="contains">
+                                            <p:commandLink class="ptext-link" value="#{stock.product.productName}" action="#{posController.selectProduct(stock.product)}" update=":cartTable"/>
                                         </p:column>
                                     </p:dataTable>
                                 </h:form>
@@ -48,7 +45,7 @@
                                 <h:form id="cartTable">
                                     <p:dataTable value="#{posController.cartList}" var="cart" scrollable="true" scrollHeight="400">
                                         <p:column headerText="#{msg.product}">
-                                            <p:inputText value="#{cart.product}" style="width: 140px"/>
+                                            <p:inputText value="#{cart.product.productName}" style="width: 140px"/>
                                         </p:column>
                                         
                                         <p:column headerText="#{msg.quantity}">
@@ -64,9 +61,24 @@
                                         </p:column>
                                         
                                         <p:column headerText="#{msg.action}" style="width: 65px">
-                                            <p:commandButton icon="#{msg.delete_icon}"/>
+                                            <p:commandButton action="#{posController.removeFromCart(cart)}" update="@form" icon="#{msg.delete_icon}"/>
                                         </p:column>
                                     </p:dataTable>
+                                    
+                                    <div class="float-right py-2">
+                                        <h:panelGrid columns="2">
+                                            <span>Total:</span>
+                                            <h:outputText value="#{posController.totalAmount}" class="field-shade">
+                                                <f:convertNumber pattern="#{msg.money_pattern}"/>
+                                            </h:outputText>
+                                        </h:panelGrid>
+                                    </div>
+                                    
+                                    <div class="pt-3">
+                                        <p:commandButton rendered="#{posController.cartList.size() > 0}" class="kbtn-default" icon="#{msg.clear_icon}" value="#{msg.clear}" action="#{posController.clear()}" update="@form"/>
+                                        <p:commandButton rendered="#{posController.cartList.size() > 0}" class="kbtn-info mx-2" icon="fa fa-cog" value="Calculate" action="#{posController.processCart()}" update="@form"/>
+                                        <p:commandButton rendered="#{posController.cartList.size() > 0}" class="kbtn-success" icon="#{msg.check_icon}" value="Save Cart" action="#{posController.saveCart()}" update="@form"/>
+                                    </div>
                                 </h:form>
                             </div>
                         </div>

@@ -22,24 +22,11 @@ import javax.persistence.Table;
 public class PurchaseOrder extends OrderRecords implements Serializable
 {
     @Column(name = "received_date")
-    private LocalDate receivedDate = LocalDate.now();
+    private LocalDate receivedDate;
     
-    @JoinColumn(name = "customer", referencedColumnName = "id")
-    @ManyToOne
-    private Customer customer;
 
     @Column(name = "posted_to_inventory")
     private boolean postedToInventory;
-
-    public Customer getCustomer()
-    {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer)
-    {
-        this.customer = customer;
-    }
 
     public LocalDate getReceivedDate()
     {

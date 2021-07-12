@@ -6,6 +6,7 @@
 package com.khoders.icpsc.app.jbeans;
 
 import com.khoders.icpsc.app.entities.Inventory;
+import com.khoders.icpsc.app.entities.InventoryItem;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.resource.jpa.CrudApi;
@@ -29,18 +30,18 @@ public class StockController implements Serializable{
     @Inject private AppSession appSession;
     @Inject private InventoryService inventoryService;
     
-    private List<Inventory> inventoryStockList = new LinkedList<>();
-    private List<Inventory> inventoryShortageStockList = new LinkedList<>();
+    private List<InventoryItem> inventoryStockList = new LinkedList<>();
+    private List<InventoryItem> inventoryShortageStockList = new LinkedList<>();
     
     private LocalDate receivedDate;
     
     @PostConstruct
     private void init()
     {
-        String qryString = "SELECT e FROM Inventory e WHERE e.userAccount=?1";
+        String qryString = "SELECT e FROM InventoryItem e WHERE e.userAccount=?1";
         inventoryStockList = crudApi
                             .getEm()
-                            .createQuery(qryString, Inventory.class)
+                            .createQuery(qryString, InventoryItem.class)
                             .setParameter(1, appSession.getCurrentUser())
                             .getResultList();
         
@@ -49,12 +50,12 @@ public class StockController implements Serializable{
 
     public void searchStock()
     {
-        String query = "SELECT e FROM Inventory e WHERE e.userAccount=?1";
+        String query = "SELECT e FROM InventoryItem e WHERE e.userAccount=?1";
         try 
         {
            inventoryStockList = crudApi
                                 .getEm()
-                                .createQuery(query, Inventory.class)
+                                .createQuery(query, InventoryItem.class)
                                 .setParameter(1, appSession.getCurrentUser())
                                 .getResultList();
            
@@ -70,11 +71,6 @@ public class StockController implements Serializable{
     }
     
     
-    
-    public List<Inventory> getInventoryStockList() {
-        return inventoryStockList;
-    }
-
     public LocalDate getReceivedDate() {
         return receivedDate;
     }
@@ -83,9 +79,14 @@ public class StockController implements Serializable{
         this.receivedDate = receivedDate;
     }
 
-    public List<Inventory> getInventoryShortageStockList() {
+    public List<InventoryItem> getInventoryStockList()
+    {
+        return inventoryStockList;
+    }
+
+    public List<InventoryItem> getInventoryShortageStockList()
+    {
         return inventoryShortageStockList;
     }
- 
-    
+
 }

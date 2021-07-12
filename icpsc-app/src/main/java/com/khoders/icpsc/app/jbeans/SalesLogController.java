@@ -46,7 +46,7 @@ public class SalesLogController implements Serializable{
     
     public void fetchSummary()
     {
-        salesCatalogueList = salesService.getSummaryInfo(dateRange);
+        cartList = salesService.getSummaryInfo(dateRange);
     }
 
     public void manageSalesLog(SalesCatalogue salesCatalogue)

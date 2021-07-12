@@ -98,6 +98,23 @@ public class InventoryService
         return Collections.emptyList();
     }
     
+    public List<InventoryItem> getInventoryItem(Inventory inventory)
+    {
+        try
+        {
+           TypedQuery<InventoryItem> typedQuery = crudApi.getEm().createQuery("SELECT e FROM InventoryItem e WHERE e.inventory=?1 AND e.userAccount=?2", InventoryItem.class);
+                            typedQuery.setParameter(1, inventory);
+                            typedQuery.setParameter(2, appSession.getCurrentUser());
+                            
+                            return  typedQuery.getResultList();
+           
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
+    
     public List<InventoryItem> getInventoryItemList()
     {
         try
@@ -148,12 +165,12 @@ public class InventoryService
         return Collections.emptyList();
     }
     
-    public List<Inventory> getShortageList()
+    public List<InventoryItem> getShortageList()
     {
-        String qryString = "SELECT e FROM Inventory e WHERE e.userAccount=?1 AND e.quantity <= 5";
+        String qryString = "SELECT e FROM InventoryItem e WHERE e.userAccount=?1 AND e.quantity <= 5";
         try {
             
-            TypedQuery<Inventory> typedQuery = crudApi.getEm().createQuery(qryString, Inventory.class);
+            TypedQuery<InventoryItem> typedQuery = crudApi.getEm().createQuery(qryString, InventoryItem.class);
                typedQuery.setParameter(1, appSession.getCurrentUser());
                
                return typedQuery.getResultList();

@@ -23,7 +23,10 @@ public class Cart extends UserAccountRecord implements Serializable{
     
     @Column(name = "cart_id")
     private String cartId;
-
+    
+    @Column(name = "receipt_number")
+    private String receiptNumber = SystemUtils.generateRefNo();
+    
     @Column(name = "quantity")
     private int quantity;
 
@@ -130,6 +133,16 @@ public class Cart extends UserAccountRecord implements Serializable{
     public void setProduct(Product product)
     {
         this.product = product;
+    }
+
+    public String getReceiptNumber()
+    {
+        return receiptNumber;
+    }
+
+    public void setReceiptNumber(String receiptNumber)
+    {
+        this.receiptNumber = receiptNumber;
     }
     
     

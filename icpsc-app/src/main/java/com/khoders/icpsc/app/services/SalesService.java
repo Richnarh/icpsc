@@ -26,26 +26,26 @@ public class SalesService
     @Inject CrudApi crudApi;
     @Inject AppSession appSession;
     
-    public List<SalesCatalogue> getSummaryInfo(DateRangeUtil dateRange)
+    public List<Cart> getSummaryInfo(DateRangeUtil dateRange)
     {
         try 
         {  
             if(dateRange.getFromDate() == null || dateRange.getToDate() == null)
                 {
-                  String  query = "SELECT e FROM SalesCatalogue e WHERE e.userAccount=?1";
-                  TypedQuery<SalesCatalogue> typedQuery
+                  String  query = "SELECT e FROM Cart e WHERE e.userAccount=?1";
+                  TypedQuery<Cart> typedQuery
                         = crudApi
                                 .getEm()
-                                .createQuery(query, SalesCatalogue.class)
+                                .createQuery(query, Cart.class)
                                 .setParameter(1, appSession.getCurrentUser());
 
                 return typedQuery.getResultList();
             }
             
-            String query = "SELECT e FROM SalesCatalogue e WHERE e.userAccount=?1 AND e.purchaseDate BETWEEN ?2 AND ?3";
-            TypedQuery<SalesCatalogue> typedQuery = crudApi
+            String query = "SELECT e FROM Cart e WHERE e.userAccount=?1 AND e.purchaseDate BETWEEN ?2 AND ?3";
+            TypedQuery<Cart> typedQuery = crudApi
                             .getEm()
-                            .createQuery(query, SalesCatalogue.class)
+                            .createQuery(query, Cart.class)
                             .setParameter(1, appSession.getCurrentUser())
                             .setParameter(2, dateRange.getFromDate())
                             .setParameter(3, dateRange.getToDate());

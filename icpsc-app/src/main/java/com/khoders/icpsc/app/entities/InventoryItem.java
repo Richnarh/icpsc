@@ -7,20 +7,24 @@ package com.khoders.icpsc.app.entities;
 
 import com.khoders.resource.enums.Months;
 import com.khoders.resource.enums.UnitOfMeasurement;
+import com.khoders.resource.utilities.SystemUtils;
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
  *
  * @author richa
  */
-
+@Entity
+@Table(name = "inventory_item")
 public class InventoryItem extends UserAccountRecord implements Serializable
 {
     @Column(name = "order_item_id")
@@ -34,8 +38,8 @@ public class InventoryItem extends UserAccountRecord implements Serializable
     @ManyToOne
     private Inventory inventory;
     
-    @Column(name = "total_amount")
-    private double totalAmount;
+    @Column(name = "total_price")
+    private double totalPrice;
     
     @Column(name = "quantity")
     private int quantity;
@@ -95,16 +99,16 @@ public class InventoryItem extends UserAccountRecord implements Serializable
         this.product = product;
     }
 
-    public double getTotalAmount()
+    public double getTotalPrice()
     {
-        return totalAmount;
+        return totalPrice;
     }
 
-    public void setTotalAmount(double totalAmount)
+    public void setTotalPrice(double totalPrice)
     {
-        this.totalAmount = totalAmount;
+        this.totalPrice = totalPrice;
     }
-
+    
     public String getDescription()
     {
         return description;
@@ -199,7 +203,17 @@ public class InventoryItem extends UserAccountRecord implements Serializable
     {
         this.unit = unit;
     }
-    
+    public void genCode()
+    {
+        if(getOrderItemId()!= null)
+        {
+           setOrderItemId(getOrderItemId());
+        }
+        else
+        {
+            setOrderItemId(SystemUtils.generateCode());
+        }
+    }
     @Override
     public String toString() {
         return product+" "+potencyValue+" "+unit;

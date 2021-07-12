@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.app.commons;
 
-import com.khoders.resource.enums.UnitOfQuantity;
+import com.khoders.resource.enums.UnitsOfQuantity;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +20,8 @@ import javax.inject.Named;
 @SessionScoped
 public class CommonBeans implements Serializable
 {
-    public List<UnitOfQuantity> getUnitOfQuantityList()
+    public List<UnitsOfQuantity> getUnitsOfQuantityList()
     {
-        return Arrays.asList(UnitOfQuantity.values());
+        return Arrays.asList(UnitsOfQuantity.values());
     }
 }

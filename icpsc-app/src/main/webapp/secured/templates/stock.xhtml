@@ -24,15 +24,15 @@
                             </h:form>
 
                             <p:panel header="Stock List">
-                                <p:dataTable id="stockTable" value="#{stockController.inventoryStockList}" var="inventoryStock" paginator="true" paginatorPosition="bottom" rows="15">
-                                    <p:column headerText="#{msg.inventory_code}">
-                                        #{inventoryStock.inventoryCode}
+                                <p:dataTable id="stockTable" value="#{stockController.inventoryStockList}" var="inventoryStock" scrollable="true" scrollHeight="400">
+                                    <p:column headerText="#{msg.product} ID">
+                                        #{inventoryStock.product.productId}
                                     </p:column>
                                     <p:column headerText="#{msg.product_name}">
                                         #{inventoryStock.product.productName}
                                     </p:column>
-                                    <p:column headerText="#{msg.qty} at hand" class="text-right">
-                                        #{inventoryStock.packageQty}
+                                    <p:column headerText="#{msg.quantity}" class="text-right">
+                                        #{inventoryStock.quantity}
                                     </p:column>
                                     <p:column headerText="#{msg.location}">
                                         #{inventoryStock.product.productLocation}
@@ -43,18 +43,15 @@
 
                         <p:tab title="Stock Shortages">
                             <p:panel header="Shortage Stock List">
-                                <p:dataTable id="shortageStockTable" value="#{stockController.inventoryShortageStockList}" var="shortageStock" paginator="true" paginatorPosition="bottom" rows="15">
-                                    <p:column headerText="#{msg.inventory_code}">
-                                        #{shortageStock.inventoryCode}
+                                <p:dataTable id="shortageStockTable" value="#{stockController.inventoryShortageStockList}" var="shortageStock"  scrollable="true" scrollHeight="400">
+                                    <p:column headerText="#{msg.product} ID">
+                                        #{shortageStock.product.productId}
                                     </p:column>
                                     <p:column headerText="#{msg.product_name}">
                                         #{shortageStock.product.productName}
                                     </p:column>
-                                    <p:column headerText="Package Quantity" class="text-right">
-                                        #{shortageStock.packageQty}
-                                    </p:column>
-                                    <p:column headerText="Qty at hand (Pieces)" class="text-right">
-                                        #{shortageStock.subQuantity}
+                                    <p:column headerText="Qty at hand" class="text-right">
+                                        #{shortageStock.quantity}
                                     </p:column>
                                     <p:column headerText="#{msg.location}">
                                         #{shortageStock.product.productLocation}

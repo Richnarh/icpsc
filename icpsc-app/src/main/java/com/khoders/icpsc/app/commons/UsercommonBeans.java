@@ -8,7 +8,9 @@ package com.khoders.icpsc.app.commons;
 import com.khoders.icpsc.app.entities.Customer;
 import com.khoders.icpsc.app.entities.ItemType;
 import com.khoders.icpsc.app.entities.Product;
+import com.khoders.icpsc.app.entities.sms.SenderId;
 import com.khoders.icpsc.app.services.InventoryService;
+import com.khoders.icpsc.app.services.SmsService;
 import com.khoders.resource.jpa.CrudApi;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -28,10 +30,12 @@ public class UsercommonBeans implements Serializable
 {
     @Inject private CrudApi crudApi;
     @Inject private InventoryService inventoryService;
+    @Inject private SmsService smsService;
     
     private List<ItemType> itemtypeList = new LinkedList<>();
     private List<Customer> customerList = new LinkedList<>();
     private List<Product> productList = new LinkedList<>();
+    private List<SenderId> senderIdList = new LinkedList<>();
     
     @PostConstruct
     public void init()
@@ -39,6 +43,7 @@ public class UsercommonBeans implements Serializable
        customerList = inventoryService.getCustomerList();
        productList = inventoryService.getProductList();
        itemtypeList = inventoryService.getItemTypeList();
+       senderIdList = smsService.getSenderIdList();
     }
 
     public List<ItemType> getItemtypeList()
@@ -54,6 +59,11 @@ public class UsercommonBeans implements Serializable
     public List<Product> getProductList()
     {
         return productList;
+    }
+
+    public List<SenderId> getSenderIdList()
+    {
+        return senderIdList;
     }
     
 }

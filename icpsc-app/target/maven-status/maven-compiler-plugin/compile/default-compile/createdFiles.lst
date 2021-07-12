@@ -6,6 +6,7 @@ com\khoders\icpsc\app\jbeans\sms\SmsController.class
 com\khoders\icpsc\app\jbeans\sms\CustomerController.class
 com\khoders\icpsc\app\jbeans\UserModel.class
 com\khoders\icpsc\app\jbeans\LoginController.class
+com\khoders\icpsc\app\jbeans\PurchaseOrderUploadController.class
 com\khoders\icpsc\app\jbeans\converters\CustomerConverter.class
 com\khoders\icpsc\app\services\PosService.class
 com\khoders\icpsc\app\entities\PurchaseOrderItem.class
@@ -24,6 +25,7 @@ com\khoders\icpsc\app\jbeans\converters\ProductConverter.class
 com\khoders\icpsc\app\jbeans\InventoryController.class
 com\khoders\icpsc\app\entities\PettyTransaction.class
 com\khoders\icpsc\app\entities\PettyTransactionItem.class
+com\khoders\icpsc\app\jbeans\converters\SenderIdConverter.class
 com\khoders\icpsc\app\entities\ItemType.class
 com\khoders\icpsc\app\entities\sms\SenderId.class
 com\khoders\icpsc\app\listener\AppSession.class

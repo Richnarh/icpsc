@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-md-3 mb-3">
                             <h:form id="receiptTable">
-                                <h:panelGrid class="mb-2" columns="2" style="padding: 0px;">
+                                <h:panelGrid class="spaced-form" columns="2">
                                      <span>From: </span>
                                      <p:datePicker value="#{salesLogController.dateRange.fromDate}"
                                                   pattern="#{msg.formatted_date}" 
@@ -35,9 +35,9 @@
                                                      value="#{msg.search}" />
                                     
                                   
-                                <p:dataTable id="searchTable" value="#{salesLogController.salesCatalogueList}" var="salesLog" paginator="true" paginatorPosition="bottom" rows="14">
+                                <p:dataTable id="searchTable" value="#{salesLogController.cartList}" var="salesLog" paginator="true" paginatorPosition="bottom" rows="14">
                                     <p:column headerText="#{msg.receipt_no}" filterBy="#{salesLog.receiptNumber}" filterMatchMode="contains">
-                                        <h:commandLink class="text-info" value="#{salesLog.receiptNumber} - (GHS #{salesLog.totalAmount})" 
+                                        <h:commandLink class="text-info" value="#{salesLog.receiptNumber} - (GHS #{salesLog.total})" 
                                                        action="#{salesLogController.manageSalesLog(salesLog)}">
                                             <p:ajax update=":salesLogTable"/>
                                         </h:commandLink>
@@ -71,10 +71,10 @@
                                                 </h:outputText>
                                             </p:column>
                                             <p:column headerText="#{msg.product}">
-                                                #{cartItem.inventory.product.productName}
+                                                #{cartItem.product.productName}
                                             </p:column>
                                             <p:column headerText="#{msg.selling_price}" class="text-right">
-                                                <h:outputText value="#{cartItem.sellingPrice}">
+                                                <h:outputText value="#{cartItem.unitPrice}">
                                                     <f:convertNumber pattern="#{msg.money_pattern}"/>
                                                 </h:outputText>
                                             </p:column>
@@ -82,7 +82,7 @@
                                                 #{cartItem.quantity}
                                             </p:column>
                                             <p:column headerText="#{msg.total_amount}" class="text-right">
-                                                <h:outputText value="#{cartItem.totalAmount}">
+                                                <h:outputText value="#{cartItem.total}">
                                                     <f:convertNumber pattern="#{msg.money_pattern}"/>
                                                 </h:outputText>
                                             </p:column>

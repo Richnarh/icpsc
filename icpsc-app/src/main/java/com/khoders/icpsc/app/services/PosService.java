@@ -27,11 +27,11 @@ public class PosService
     @Inject private CrudApi crudApi;
     @Inject private AppSession appSession;
     
-    public List<Inventory> getInventoryProduct(Product product)
+    public List<InventoryItem> getInventoryProduct(Product product)
     {
         try
         {
-           TypedQuery<Inventory> typedQuery = crudApi.getEm().createQuery("SELECT e FROM Inventory e WHERE e.inventory=?1 AND e.userAccount=?2", Inventory.class);
+           TypedQuery<InventoryItem> typedQuery = crudApi.getEm().createQuery("SELECT e FROM InventoryItem e WHERE e.product=?1 AND e.userAccount=?2", InventoryItem.class);
                             typedQuery.setParameter(1, product);
                             typedQuery.setParameter(2, appSession.getCurrentUser());
                             

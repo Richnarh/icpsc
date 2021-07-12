@@ -8,7 +8,9 @@ package com.khoders.icpsc.app.entities;
 import com.khoders.resource.utilities.SystemUtils;
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -30,7 +32,11 @@ public class OrderRecords extends UserAccountRecord implements Serializable
     @Column(name = "description")
     @Lob
     private String description;
-
+    
+    @JoinColumn(name = "customer", referencedColumnName = "id")
+    @ManyToOne
+    private Customer customer;
+    
     public String getOrderId()
     {
         return orderId;
@@ -69,6 +75,16 @@ public class OrderRecords extends UserAccountRecord implements Serializable
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public Customer getCustomer()
+    {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer)
+    {
+        this.customer = customer;
     }
     
    public void genCode()

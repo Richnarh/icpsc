@@ -35,6 +35,9 @@ public class PurchaseOrderItem extends UserAccountRecord implements Serializable
     @Column(name = "quantity")
     private int quantity;
     
+    @Column(name = "total_amount")
+    private double totalAmount;
+    
     @Column(name = "unit_price")
     private double unitPrice;
     
@@ -86,6 +89,16 @@ public class PurchaseOrderItem extends UserAccountRecord implements Serializable
     public void setProduct(Product product)
     {
         this.product = product;
+    }
+
+    public double getTotalAmount()
+    {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(double totalAmount)
+    {
+        this.totalAmount = totalAmount;
     }
     
     public void genCode()
