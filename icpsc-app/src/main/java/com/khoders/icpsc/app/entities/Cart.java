@@ -7,6 +7,7 @@ package com.khoders.icpsc.app.entities;
 
 import com.khoders.resource.utilities.SystemUtils;
 import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,11 +22,8 @@ import javax.persistence.Table;
 @Table(name = "cart")
 public class Cart extends UserAccountRecord implements Serializable{
     
-    @Column(name = "cart_id")
-    private String cartId;
-    
-    @Column(name = "receipt_number")
-    private String receiptNumber = SystemUtils.generateRefNo();
+    @Column(name = "cart_item_id")
+    private String cartItemId;
     
     @Column(name = "quantity")
     private int quantity;
@@ -45,10 +43,14 @@ public class Cart extends UserAccountRecord implements Serializable{
     @JoinColumn(name = "customer")
     @ManyToOne
     private Customer customer;
-
-    @JoinColumn(name = "product")
+    
+    @JoinColumn(name = "sales_catalogue", referencedColumnName = "id")
     @ManyToOne
-    private Product product;
+    private SalesCatalogue salesCatalogue;
+    
+    @JoinColumn(name = "inventory")
+    @ManyToOne
+    private InventoryItem inventoryItem;
 
     @Column(name = "description")
     private String description;
@@ -106,15 +108,17 @@ public class Cart extends UserAccountRecord implements Serializable{
     {
         this.description = description;
     }
+
+    public String getCartItemId()
+    {
+        return cartItemId;
+    }
+
+    public void setCartItemId(String cartItemId)
+    {
+        this.cartItemId = cartItemId;
+    }
     
-    public String getCartId() {
-        return cartId;
-    }
-
-    public void setCartId(String cartId) {
-        this.cartId = cartId;
-    }
-
     public double getTotal()
     {
         return total;
@@ -125,36 +129,35 @@ public class Cart extends UserAccountRecord implements Serializable{
         this.total = total;
     }
 
-    public Product getProduct()
+    public InventoryItem getInventoryItem()
     {
-        return product;
+        return inventoryItem;
     }
 
-    public void setProduct(Product product)
+    public void setInventoryItem(InventoryItem inventoryItem)
     {
-        this.product = product;
+        this.inventoryItem = inventoryItem;
     }
 
-    public String getReceiptNumber()
+    public SalesCatalogue getSalesCatalogue()
     {
-        return receiptNumber;
+        return salesCatalogue;
     }
 
-    public void setReceiptNumber(String receiptNumber)
+    public void setSalesCatalogue(SalesCatalogue salesCatalogue)
     {
-        this.receiptNumber = receiptNumber;
+        this.salesCatalogue = salesCatalogue;
     }
-    
-    
+
     public void genCode()
     {
-        if(getCartId()!= null)
+        if(getCartItemId()!= null)
         {
-           setCartId(getCartId());
+           setCartItemId(getCartItemId());
         }
         else
         {
-            setCartId(SystemUtils.generateCode());
+            setCartItemId(SystemUtils.generateCode());
         }
     }
 }

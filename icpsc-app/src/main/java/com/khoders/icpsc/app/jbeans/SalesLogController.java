@@ -46,10 +46,10 @@ public class SalesLogController implements Serializable{
     
     public void fetchSummary()
     {
-        cartList = salesService.getSummaryInfo(dateRange);
+        salesCatalogueList = salesService.getSalesFromCatalogue(dateRange);
     }
 
-    public void manageSalesLog(SalesCatalogue salesCatalogue)
+    public void selectSale(SalesCatalogue salesCatalogue)
     {
         this.salesCatalogue = salesCatalogue;
         cartList = salesService.getSalesList(salesCatalogue);
@@ -58,31 +58,9 @@ public class SalesLogController implements Serializable{
     public void profitPerMonth()
     {
         
-        if(dateRange.getFromDate() == null || dateRange.getToDate() == null)
-        {
-            FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                Msg.setMsg("Please choose a date and click on search"), null));
-                return;
-        }
-
-        String qryString = "SELECT SUM(e.profit) FROM Cart e WHERE e.userAccount=?1 AND e.valueDate BETWEEN ?2 AND ?3";
-        Query query = crudApi.getEm().createQuery(qryString,  Cart.class);
-            query.setParameter(1, appSession.getCurrentUser());
-            query.setParameter(2, dateRange.getFromDate());
-            query.setParameter(3, dateRange.getToDate());
-            
-            Double result = (Double) query.getSingleResult();
-            
-            if(result == null)
-            {
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                Msg.setMsg("Either date is not selected or there was no sales for this date(s)!"), null));
-                return;
-            }
-            
-            totalProfitSum=result;
+        cartList = salesService.getCartList(dateRange);
+        
+        totalProfitSum = cartList.stream().mapToDouble(Cart::getProfit).sum();
     }
     
     public void resetPage()

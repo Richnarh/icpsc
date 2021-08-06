@@ -8,6 +8,7 @@ package com.khoders.icpsc.app.commons;
 import com.khoders.icpsc.app.entities.Customer;
 import com.khoders.icpsc.app.entities.ItemType;
 import com.khoders.icpsc.app.entities.Product;
+import com.khoders.icpsc.app.entities.sms.MessageTemplate;
 import com.khoders.icpsc.app.entities.sms.SenderId;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.icpsc.app.services.SmsService;
@@ -36,6 +37,7 @@ public class UsercommonBeans implements Serializable
     private List<Customer> customerList = new LinkedList<>();
     private List<Product> productList = new LinkedList<>();
     private List<SenderId> senderIdList = new LinkedList<>();
+    private List<MessageTemplate> messageTemplateList = new LinkedList<>();
     
     @PostConstruct
     public void init()
@@ -44,6 +46,7 @@ public class UsercommonBeans implements Serializable
        productList = inventoryService.getProductList();
        itemtypeList = inventoryService.getItemTypeList();
        senderIdList = smsService.getSenderIdList();
+       messageTemplateList = smsService.getMessageTemplateList();
     }
 
     public List<ItemType> getItemtypeList()
@@ -64,6 +67,11 @@ public class UsercommonBeans implements Serializable
     public List<SenderId> getSenderIdList()
     {
         return senderIdList;
+    }
+
+    public List<MessageTemplate> getMessageTemplateList()
+    {
+        return messageTemplateList;
     }
     
 }

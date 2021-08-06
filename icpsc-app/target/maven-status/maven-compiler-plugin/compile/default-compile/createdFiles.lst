@@ -2,6 +2,7 @@ com\khoders\icpsc\app\entities\Product.class
 com\khoders\icpsc\app\jbeans\sms\ContactGroupController.class
 com\khoders\icpsc\app\commons\CommonBeans.class
 com\khoders\icpsc\app\entities\sms\MessageTemplate.class
+com\khoders\icpsc\app\jbeans\ProfileUpdateController.class
 com\khoders\icpsc\app\jbeans\sms\SmsController.class
 com\khoders\icpsc\app\jbeans\sms\CustomerController.class
 com\khoders\icpsc\app\jbeans\UserModel.class
@@ -32,6 +33,7 @@ com\khoders\icpsc\app\listener\AppSession.class
 com\khoders\icpsc\app\jbeans\sms\SmsController$1.class
 com\khoders\icpsc\app\entities\sms\SMSGrup.class
 com\khoders\icpsc\app\jbeans\PosController.class
+com\khoders\icpsc\app\jbeans\converters\MessageTemplateConverter.class
 com\khoders\icpsc\app\jbeans\sms\SenderIdController.class
 com\khoders\icpsc\app\listener\SessionListener.class
 com\khoders\icpsc\app\entities\Inventory.class

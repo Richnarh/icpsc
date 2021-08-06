@@ -10,10 +10,14 @@ import com.khoders.icpsc.app.entities.SalesCatalogue;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.resource.jpa.CrudApi;
 import com.khoders.resource.utilities.DateRangeUtil;
+import com.khoders.resource.utilities.Msg;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -26,26 +30,21 @@ public class SalesService
     @Inject CrudApi crudApi;
     @Inject AppSession appSession;
     
-    public List<Cart> getSummaryInfo(DateRangeUtil dateRange)
+    public List<SalesCatalogue> getSalesFromCatalogue(DateRangeUtil dateRange)
     {
         try 
         {  
-            if(dateRange.getFromDate() == null || dateRange.getToDate() == null)
+            if(dateRange == null)
                 {
-                  String  query = "SELECT e FROM Cart e WHERE e.userAccount=?1";
-                  TypedQuery<Cart> typedQuery
-                        = crudApi
-                                .getEm()
-                                .createQuery(query, Cart.class)
-                                .setParameter(1, appSession.getCurrentUser());
+                  String  query = "SELECT e FROM SalesCatalogue e WHERE e.userAccount=?1";
+                  TypedQuery<SalesCatalogue> typedQuery = crudApi.getEm().createQuery(query, SalesCatalogue.class)
+                          .setParameter(1, appSession.getCurrentUser());
 
                 return typedQuery.getResultList();
             }
             
-            String query = "SELECT e FROM Cart e WHERE e.userAccount=?1 AND e.purchaseDate BETWEEN ?2 AND ?3";
-            TypedQuery<Cart> typedQuery = crudApi
-                            .getEm()
-                            .createQuery(query, Cart.class)
+            String query = "SELECT e FROM SalesCatalogue e WHERE e.userAccount=?1 AND e.valueDate BETWEEN ?2 AND ?3";
+            TypedQuery<SalesCatalogue> typedQuery = crudApi.getEm().createQuery(query, SalesCatalogue.class)
                             .setParameter(1, appSession.getCurrentUser())
                             .setParameter(2, dateRange.getFromDate())
                             .setParameter(3, dateRange.getToDate());
@@ -77,4 +76,31 @@ public class SalesService
         return Collections.emptyList();
     }
     
+   public List<Cart> getCartList(DateRangeUtil dateRange)
+   {
+       try
+       {
+        if(dateRange == null)
+        {
+            String  query = "SELECT e FROM Cart e WHERE e.userAccount=?1";
+                  TypedQuery<Cart> typedQuery = crudApi.getEm().createQuery(query, Cart.class)
+                          .setParameter(1, appSession.getCurrentUser());
+
+                return typedQuery.getResultList();
+        }
+
+        String qryString = "SELEC e FROM Cart e WHERE e.userAccount=?1 AND e.valueDate BETWEEN ?2 AND ?3";
+        TypedQuery<Cart> query = crudApi.getEm().createQuery(qryString,  Cart.class);
+            query.setParameter(1, appSession.getCurrentUser());
+            query.setParameter(2, dateRange.getFromDate());
+            query.setParameter(3, dateRange.getToDate());
+            
+            return query.getResultList();
+            
+       } catch (Exception e)
+       {
+           e.printStackTrace();
+       }
+       return Collections.emptyList();
+   }
 }

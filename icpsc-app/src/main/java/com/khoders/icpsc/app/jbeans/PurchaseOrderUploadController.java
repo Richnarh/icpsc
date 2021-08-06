@@ -56,24 +56,19 @@ public class PurchaseOrderUploadController implements Serializable
     
     public void uploadOrder()
     {
-        if(file.getSize() < 1)
-        {
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("No excel file is selected!"), null));
-            return;
-        }
+
         try
         {
                String extension = getFileExtension(file.getFileName());
                
-               System.out.println("type ==> "+extension);
+               System.out.println("file extention ==> "+extension);
                
-               if(!extension.equals(FileExtension.xls.name()) || !extension.equals(FileExtension.xlsx.name()))
-               {
-                 FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("File not supported!"), null));  
-                 return;
-               }
+//               if(!extension.equals(FileExtension.xls.name()) || !extension.equals(FileExtension.xlsx.name()))
+//               {
+//                 FacesContext.getCurrentInstance().addMessage(null, 
+//                new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("File not supported!"), null));  
+//                 return;
+//               }
                 
                 InputStream inputStream = file.getInputStream();
                 XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
@@ -132,7 +127,7 @@ public class PurchaseOrderUploadController implements Serializable
                 crudApi.save(order);
             }); 
             FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("File upload successful!"), null));   
+                new FacesMessage(FacesMessage.SEVERITY_INFO, Msg.setMsg("File upload successful!"), null));   
             }
             
             

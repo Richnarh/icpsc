@@ -11,6 +11,7 @@ C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\jbeans\Sales
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\jbeans\sms\SenderIdController.java
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\jbeans\sms\MessageTemplateController.java
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\entities\PettyTransaction.java
+C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\jbeans\ProfileUpdateController.java
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\jbeans\sms\SMSGrupController.java
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\entities\enums\MessagingType.java
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\jbeans\PurchaseOrderController.java
@@ -30,6 +31,7 @@ C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\jbeans\ItemT
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\jbeans\PosController.java
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\entities\PurchaseOrderItem.java
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\entities\UserAccountRecord.java
+C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\jbeans\converters\MessageTemplateConverter.java
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\listener\AppSession.java
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\commons\CommonBeans.java
 C:\khoders\Java\icpsc\icpsc-app\src\main\java\com\khoders\icpsc\app\jbeans\converters\CustomerConverter.java

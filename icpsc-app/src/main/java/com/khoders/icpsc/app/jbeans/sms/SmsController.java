@@ -68,9 +68,14 @@ public class SmsController implements Serializable
     private void init()
     {
         customerList = smsService.getContactList();
-        
+        loadSmslog();
         getConnection();
         
+    }
+    
+    public void loadSmslog()
+    {
+        smsList =smsService.loadSmslogList();
     }
     
     private void getConnection()
@@ -129,8 +134,16 @@ public class SmsController implements Serializable
                     System.out.println("TEMPLATE_MESSAGING -- " + selectedMessageTemplate.getTemplateText());
                 } else
                 {
+                    if(textMessage.isEmpty())
+                    {
+                         FacesContext.getCurrentInstance().addMessage(null,
+                                        new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("Please type a message"), null));
+                        
+                        return;
+                    }
                     zsms.setMessage(textMessage);
                 }
+                
                 String phoneNumber = selectedCustomer.getPhone();
                 List<String> numbers = zsms.extractPhoneNumbers(phoneNumber);
 
@@ -171,7 +184,7 @@ public class SmsController implements Serializable
 
             } else
             {
-                System.out.println("---------Connection not Available ----");
+                System.out.println("--------- INTERNET CONNECTION NOT AVAILABLE ----");
             }
         } catch (Exception e)
         {
@@ -286,7 +299,8 @@ public class SmsController implements Serializable
                     System.out.println("SMS sent and saved -- ");
                 }  
             }
-            
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, Msg.setMsg("SMS sending successful!"), null));
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -304,6 +318,9 @@ public class SmsController implements Serializable
             sms.setUserAccount(appSession.getCurrentUser());
            if(crudApi.save(sms) != null)
            {
+               FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, Msg.setMsg("SMS sent to "+selectedCustomer.getCustomerName()), null));
+               
                System.out.println("SMS sent and saved -- ");
            }
         } catch (Exception e)
@@ -312,11 +329,7 @@ public class SmsController implements Serializable
         }
     }
        
-    public void loadSmslog()
-    {
-        smsList =smsService.loadSmslogList();
-    }
-    
+
     public void loadContactGroup()
     {
         groupContactList = smsService.getContactGroupList(smsGrup);

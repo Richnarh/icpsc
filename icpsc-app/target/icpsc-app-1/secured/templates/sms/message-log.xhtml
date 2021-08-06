@@ -19,7 +19,7 @@
                             <div class="col-md-12">
                                 <h:form id="smsLogTable">
                                     <p:dataTable value="#{smsController.smsList}" var="sms" scrollHeight="400" scrollable="true">
-                                        <p:column class="row-toggler">
+                                        <p:column style="width: 37px">
                                             <p:rowToggler/>
                                         </p:column>
 
@@ -28,17 +28,19 @@
                                                 <span>SMS ID</span>
                                                 <h:outputText value="#{sms.smsId}"/>
                                                 
-                                                <span>Sender</span>
-                                                <h:outputText value=" #{sms.senderName}"/>
+                                                <span>Sender ID</span>
+                                                <h:outputText value=" #{sms.senderId}"/>
                                             </h:panelGrid>
                                             
                                         </p:rowExpansion>
                                         <p:column headerText="#{msg.date}">
-                                            #{sms.smsTime}
+                                            <h:outputText value="#{sms.smsTime}">
+                                                <f:convertDateTime type="localDateTime" pattern="#{msg.formated_date_time_words}"/>
+                                            </h:outputText>
                                         </p:column>
 
-                                        <p:column headerText="#{msg.client}">
-                                            #{sms.client.clientName} - #{sms.client.phone}
+                                        <p:column headerText="#{msg.customer}">
+                                            #{sms.customer.customerName} - #{sms.customer.phone}
                                         </p:column>
 
                                         <p:column headerText="Message">

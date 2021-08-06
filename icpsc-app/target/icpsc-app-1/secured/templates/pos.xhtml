@@ -45,7 +45,7 @@
                                 <h:form id="cartTable">
                                     <p:dataTable value="#{posController.cartList}" var="cart" scrollable="true" scrollHeight="400">
                                         <p:column headerText="#{msg.product}">
-                                            <p:inputText value="#{cart.product.productName}" style="width: 140px"/>
+                                            <p:inputText value="#{cart.inventoryItem.product.productName}" style="width: 140px"/>
                                         </p:column>
                                         
                                         <p:column headerText="#{msg.quantity}">
