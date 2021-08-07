@@ -51,8 +51,8 @@ public class InventoryItem extends UserAccountRecord implements Serializable
     @Column(name = "selling_price")
     private double sellingPrice;
     
-    @Column(name = "unit_price")
-    private double unitPrice;
+    @Column(name = "cost_price")
+    private double costPrice;
     
     @Column(name = "expiry_date")
     private String expiryDate;
@@ -79,14 +79,14 @@ public class InventoryItem extends UserAccountRecord implements Serializable
         this.orderItemId = orderItemId;
     }
 
-    public double getUnitPrice()
+    public double getCostPrice()
     {
-        return unitPrice;
+        return costPrice;
     }
 
-    public void setUnitPrice(double unitPrice)
+    public void setCostPrice(double costPrice)
     {
-        this.unitPrice = unitPrice;
+        this.costPrice = costPrice;
     }
     
     public Product getProduct()

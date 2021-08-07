@@ -67,16 +67,17 @@ public class PosController implements Serializable
         {
             cart.setQuantity(1);
             cart.setInventoryItem(item);
-            cart.setUnitPrice(item.getUnitPrice());
+            cart.setUnitPrice(item.getSellingPrice());
             cartList.add(cart);
-            
         }
     }
+    
     public void processCart()
     {
         double totalCost = 0.0;
         try 
         {
+            totalAmount =0.0;
             for (Cart cartItem : cartList) 
             {
                 if(cartItem.getQuantity() <= 0)
@@ -100,14 +101,16 @@ public class PosController implements Serializable
                 totalCost = (cartItem.getQuantity() * cartItem.getUnitPrice());
                 cartItem.setTotal(totalCost);
                 
-                totalAmount += cartItem.getTotal();
+                totalAmount += totalCost;
            }
         } 
+            
         catch (Exception e) 
         {
             e.printStackTrace();
         }
     }    
+    
     public void saveCart()
     {
     

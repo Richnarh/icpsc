@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.khoders.icpsc.admin.jooq;
+package com.khoders.icpsc.admin.jbeans;
 
 import com.khoders.icpsc.admin.listener.AppSession;
 import com.khoders.icpsc.admin.services.UserAccountService;
 import com.khoders.icpsc.entities.UserAccount;
 import com.khoders.im.admin.Pages;
-import com.khoders.icpsc.admin.jooq.UserModel;
+import com.khoders.icpsc.admin.jbeans.UserModel;
 import com.khoders.resource.enums.AccessLevel;
 import com.khoders.resource.utilities.Msg;
 import java.io.Serializable;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.khoders.icpsc.admin.jooq.converter;
+package com.khoders.icpsc.admin.jbeans.converter;
 
 import com.khoders.icpsc.entities.Branch;
 import javax.faces.component.UIComponent;

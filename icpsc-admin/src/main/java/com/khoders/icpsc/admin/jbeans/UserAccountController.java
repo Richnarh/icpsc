@@ -1,4 +1,4 @@
-package com.khoders.icpsc.admin.jooq;
+package com.khoders.icpsc.admin.jbeans;
 
 import com.khoders.icpsc.admin.services.UserAccountService;
 import com.khoders.icpsc.entities.UserAccount;

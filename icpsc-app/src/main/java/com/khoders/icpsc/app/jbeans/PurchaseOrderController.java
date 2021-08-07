@@ -258,7 +258,7 @@ public class PurchaseOrderController implements Serializable
                     inventoryItem.setProduct(item.getProduct());
                     inventoryItem.setDescription(purchaseOrder.getDescription());
                     inventoryItem.setQuantity(item.getQuantity());
-                    inventoryItem.setUnitPrice(item.getUnitPrice());
+                    inventoryItem.setCostPrice(item.getUnitPrice());
                     inventoryItem.setUserAccount(appSession.getCurrentUser());
 
                     crudApi.save(inventoryItem);  

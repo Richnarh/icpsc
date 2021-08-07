@@ -43,9 +43,9 @@
                             </div>
                             <div class="card-body">
                                 <h:form id="cartTable">
-                                    <p:dataTable value="#{posController.cartList}" var="cart" scrollable="true" scrollHeight="400">
+                                    <p:dataTable value="#{posController.cartList}" var="cart">
                                         <p:column headerText="#{msg.product}">
-                                            <p:inputText value="#{cart.inventoryItem.product.productName}" style="width: 140px"/>
+                                            <h:outputText value="#{cart.inventoryItem.product.productName}" style="width: 140px"/>
                                         </p:column>
                                         
                                         <p:column headerText="#{msg.quantity}">
@@ -57,22 +57,21 @@
                                         </p:column>
                                         
                                         <p:column headerText="Total" style="width: 90px">
-                                            <h:outputText value="#{cart.total}"/>
+                                            <h:outputText value="#{cart.unitPrice * cart.quantity}"/>
                                         </p:column>
                                         
                                         <p:column headerText="#{msg.action}" style="width: 65px">
                                             <p:commandButton action="#{posController.removeFromCart(cart)}" update="@form" icon="#{msg.delete_icon}"/>
                                         </p:column>
-                                    </p:dataTable>
-                                    
-                                    <div class="float-right py-2">
-                                        <h:panelGrid columns="2">
-                                            <span>Total:</span>
-                                            <h:outputText value="#{posController.totalAmount}" class="field-shade">
+                                        
+                                        <f:facet name="footer">
+                                            <h:outputText value="#{posController.totalAmount}" class="float-right col-4 field-shade">
                                                 <f:convertNumber pattern="#{msg.money_pattern}"/>
                                             </h:outputText>
-                                        </h:panelGrid>
-                                    </div>
+                                        </f:facet>
+                                    </p:dataTable>
+                                    
+                                   
                                     
                                     <div class="pt-3">
                                         <p:commandButton rendered="#{posController.cartList.size() > 0}" class="kbtn-default" icon="#{msg.clear_icon}" value="#{msg.clear}" action="#{posController.clear()}" update="@form"/>

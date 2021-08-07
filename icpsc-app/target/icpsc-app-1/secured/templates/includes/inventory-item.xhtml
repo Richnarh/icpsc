@@ -19,8 +19,11 @@
                     <span>#{msg.quantity} <span class="text-danger">*</span> </span>
                     <p:inputText value="#{inventoryController.inventoryItem.quantity}" required="true"/>
 
-                    <span>Unit Price <span class="text-danger">*</span> </span>
-                    <p:inputText value="#{inventoryController.inventoryItem.unitPrice}" required="true"/>
+                    <span>Cost Price <span class="text-danger">*</span> </span>
+                    <p:inputText value="#{inventoryController.inventoryItem.costPrice}" required="true"/>
+
+                    <span>Selling Price <span class="text-danger">*</span> </span>
+                    <p:inputText value="#{inventoryController.inventoryItem.sellingPrice}" required="true"/>
 
                 </h:panelGrid>
 
@@ -51,22 +54,28 @@
                         </p:panelGrid>
                     </p:rowExpansion>
 
-                    <p:column headerText="#{msg.product}">
+                    <p:column headerText="#{msg.product}" style="width: 140px;">
                         #{inventoryItem.product.productName}
                     </p:column>
 
-                    <p:column headerText="#{msg.quantity}" class="text-right">
+                    <p:column headerText="#{msg.qty}" class="text-right">
                         #{inventoryItem.quantity}
                     </p:column>
 
-                    <p:column headerText="#{msg.unit_price}" class="text-right">
-                        <h:outputText value="#{inventoryItem.unitPrice}">
+                    <p:column headerText="CP" class="text-right">
+                        <h:outputText value="#{inventoryItem.costPrice}">
+                            <f:convertNumber pattern="#{msg.money_pattern}"/>
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="SP" class="text-right">
+                        <h:outputText value="#{inventoryItem.sellingPrice}">
                             <f:convertNumber pattern="#{msg.money_pattern}"/>
                         </h:outputText>
                     </p:column>
                     
                     <p:column headerText="Total price" class="text-right">
-                        <h:outputText value="#{inventoryItem.unitPrice * inventoryItem.quantity}">
+                        <h:outputText value="#{inventoryItem.costPrice * inventoryItem.quantity}">
                             <f:convertNumber pattern="#{msg.money_pattern}"/>
                         </h:outputText>
                     </p:column>

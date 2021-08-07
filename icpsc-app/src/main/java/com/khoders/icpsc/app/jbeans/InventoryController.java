@@ -117,7 +117,7 @@ public class InventoryController implements Serializable
               
         for (InventoryItem items : inventoryItemList) 
         {
-            totalAmount += (items.getQuantity() * items.getUnitPrice());
+            totalAmount += (items.getQuantity() * items.getCostPrice());
         }
        
     }
@@ -142,7 +142,7 @@ public class InventoryController implements Serializable
 //                return;
 //            }
             
-            if (inventoryItem.getUnitPrice() <= 0.0) {
+            if (inventoryItem.getCostPrice() <= 0.0) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("Please enter price"), null));
                 return;
@@ -150,7 +150,7 @@ public class InventoryController implements Serializable
 
             if (inventoryItem != null) {
                
-                totalAmount += inventoryItem.getQuantity() * inventoryItem.getUnitPrice();
+                totalAmount += inventoryItem.getQuantity() * inventoryItem.getCostPrice();
                 
                 inventoryItemList.add(inventoryItem);
                 inventoryItemList = CollectionList.washList(inventoryItemList, inventoryItem);
@@ -200,13 +200,13 @@ public class InventoryController implements Serializable
     public void editInventoryItem(InventoryItem inventoryItem)
     {
         this.inventoryItem = inventoryItem;
-        totalAmount -= (inventoryItem.getQuantity() * inventoryItem.getUnitPrice());
+        totalAmount -= (inventoryItem.getQuantity() * inventoryItem.getCostPrice());
         inventoryItemList.remove(inventoryItem);
     }
     
     public void removeInventoryItem(InventoryItem inventoryItem)
     {
-        totalAmount -= (inventoryItem.getQuantity() * inventoryItem.getUnitPrice());
+        totalAmount -= (inventoryItem.getQuantity() * inventoryItem.getCostPrice());
         removedOrderItemList = CollectionList.washList(removedOrderItemList, inventoryItem);
         inventoryItemList.remove(inventoryItem);
         

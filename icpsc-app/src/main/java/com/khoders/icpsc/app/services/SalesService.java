@@ -34,7 +34,7 @@ public class SalesService
     {
         try 
         {  
-            if(dateRange == null)
+            if(dateRange.getFromDate() == null || dateRange.getToDate() == null)
                 {
                   String  query = "SELECT e FROM SalesCatalogue e WHERE e.userAccount=?1";
                   TypedQuery<SalesCatalogue> typedQuery = crudApi.getEm().createQuery(query, SalesCatalogue.class)
@@ -80,7 +80,7 @@ public class SalesService
    {
        try
        {
-        if(dateRange == null)
+        if(dateRange.getFromDate() == null || dateRange.getToDate() == null)
         {
             String  query = "SELECT e FROM Cart e WHERE e.userAccount=?1";
                   TypedQuery<Cart> typedQuery = crudApi.getEm().createQuery(query, Cart.class)

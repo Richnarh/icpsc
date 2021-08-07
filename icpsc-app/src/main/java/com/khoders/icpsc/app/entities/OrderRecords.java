@@ -5,6 +5,8 @@
  */
 package com.khoders.icpsc.app.entities;
 
+import com.khoders.icpsc.app.entities.Customer;
+import com.khoders.icpsc.app.entities.UserAccountRecord;
 import com.khoders.resource.utilities.SystemUtils;
 import java.io.Serializable;
 import javax.persistence.Column;

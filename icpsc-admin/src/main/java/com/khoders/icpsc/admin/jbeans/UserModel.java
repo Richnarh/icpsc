@@ -1,4 +1,4 @@
-package com.khoders.icpsc.admin.jooq;
+package com.khoders.icpsc.admin.jbeans;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

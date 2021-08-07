@@ -6,7 +6,7 @@
 package com.khoders.icpsc.admin.services;
 
 import com.khoders.icpsc.entities.UserAccount;
-import com.khoders.icpsc.admin.jooq.UserModel;
+import com.khoders.icpsc.admin.jbeans.UserModel;
 import com.khoders.resource.jpa.CrudApi;
 import static com.khoders.resource.utilities.SecurityUtil.hashText;
 import java.util.Collections;
@@ -34,10 +34,7 @@ public class UserAccountService
                     .setParameter(1, userModel.getUserEmail())
                     .setParameter(2, hashText(userModel.getPassword()));
             
-                 if(typedQuery.getSingleResult() != null)
-                 {
-                    return typedQuery.getSingleResult();
-                 }
+                 return typedQuery.getResultStream().findFirst().orElse(null);
 
         } catch (Exception e)
         {

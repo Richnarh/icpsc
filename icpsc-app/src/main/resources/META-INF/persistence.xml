@@ -7,6 +7,12 @@
     <class>com.khoders.icpsc.entities.UserPermissions</class>
     <class>com.khoders.icpsc.entities.Branch</class>
     <class>com.khoders.icpsc.entities.Profile</class>
+    <class>com.khoders.icpsc.entities.Cart</class>
+    <class>com.khoders.icpsc.entities.SalesCatalogue</class>
+    <class>com.khoders.icpsc.entities.Customer</class>
+    <class>com.khoders.icpsc.entities.InventoryItem</class>
+    <class>com.khoders.icpsc.entities.ItemType</class>
+    <class>com.khoders.icpsc.entities.Product</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
