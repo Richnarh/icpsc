@@ -5,14 +5,15 @@
  */
 package com.khoders.icpsc.admin.jbeans;
 
+import com.khoders.icpsc.admin.Pages;
 import com.khoders.icpsc.admin.listener.AppSession;
 import com.khoders.icpsc.admin.services.UserAccountService;
 import com.khoders.icpsc.entities.UserAccount;
-import com.khoders.im.admin.Pages;
-import com.khoders.icpsc.admin.jbeans.UserModel;
 import com.khoders.resource.enums.AccessLevel;
 import com.khoders.resource.utilities.Msg;
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -35,6 +36,13 @@ public class LoginController implements Serializable
     private String password;
     
     private UserModel userModel = new UserModel();
+    
+    private List<UserAccount> userAccountList = new LinkedList<>();
+    
+    private void init()
+    {
+        userAccountList = userAccountService.getAccountList();
+    }
     
     public String doLogin()
     {
@@ -109,7 +117,7 @@ public class LoginController implements Serializable
         }
         return null;
     }
-
+  
     public String getUserEmail()
     {
         return UserEmail;

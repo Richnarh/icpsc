@@ -8,6 +8,6 @@ import org.omnifaces.util.Faces;
  * @author Juneau
  */
 public class Pages extends Application {
-        public static String index = Faces.getRequestBaseURL() + "secured/index.xhtml?faces-redirect=true";
+    public static String index = Faces.getRequestBaseURL() + "secured/index.xhtml?faces-redirect=true";
     public static String login = Faces.getRequestBaseURL();
 }

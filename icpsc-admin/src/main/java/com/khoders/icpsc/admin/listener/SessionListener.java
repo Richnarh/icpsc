@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.khoders.im.admin.listener;
+package com.khoders.icpsc.admin.listener;
 
-import com.khoders.icpsc.admin.listener.AppSession;
-import com.khoders.im.admin.Pages;
+import com.khoders.icpsc.admin.Pages;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;

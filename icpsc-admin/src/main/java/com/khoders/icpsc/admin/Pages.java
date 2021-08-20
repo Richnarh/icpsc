@@ -1,4 +1,4 @@
-package com.khoders.im.admin;
+package com.khoders.icpsc.admin;
 
 import org.omnifaces.util.Faces;
 
@@ -8,5 +8,6 @@ import org.omnifaces.util.Faces;
  */
 public class Pages{
     public static String index = Faces.getRequestBaseURL() + "app/index.xhtml?faces-redirect=true";
+    public static String index2 = Faces.getRequestBaseURL() + "secured/index.xhtml?faces-redirect=true";
     public static String login = Faces.getRequestBaseURL();
 }
