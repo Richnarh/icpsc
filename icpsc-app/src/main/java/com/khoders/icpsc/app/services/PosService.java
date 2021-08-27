@@ -5,10 +5,9 @@
  */
 package com.khoders.icpsc.app.services;
 
-import com.khoders.icpsc.app.entities.Inventory;
+import com.khoders.icpsc.app.entities.Cart;
 import com.khoders.icpsc.app.entities.InventoryItem;
 import com.khoders.icpsc.app.entities.Product;
-import com.khoders.icpsc.app.entities.PurchaseOrderItem;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.resource.jpa.CrudApi;
 import java.util.Collections;
@@ -16,6 +15,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
+import static org.apache.commons.math3.stat.StatUtils.product;
 
 /**
  *
@@ -38,6 +38,23 @@ public class PosService
                             return  typedQuery.getResultList();
            
         } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
+    
+    public List<Cart> getClientReceipt(String id)
+    {
+        String qryString = "SELECT e FROM Cart e WHERE e.customerPhone=?1";
+        try 
+        {
+            TypedQuery<Cart> typedQuery = crudApi.getEm().createQuery(qryString, Cart.class);
+                    typedQuery.setParameter(1, id);
+                    
+                return typedQuery.getResultList();
+            
+        } catch (Exception e) 
         {
             e.printStackTrace();
         }

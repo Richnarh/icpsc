@@ -31,6 +31,9 @@ public class Cart extends UserAccountRecord implements Serializable{
     @Column(name = "unit_price")
     private double unitPrice;
 
+    @Column(name = "customer_phone")
+    private String customerPhone;
+
     @Column(name = "cost_price")
     private double costPrice;
     
@@ -147,6 +150,16 @@ public class Cart extends UserAccountRecord implements Serializable{
     public void setSalesCatalogue(SalesCatalogue salesCatalogue)
     {
         this.salesCatalogue = salesCatalogue;
+    }
+
+    public String getCustomerPhone()
+    {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone)
+    {
+        this.customerPhone = customerPhone;
     }
 
     public void genCode()
