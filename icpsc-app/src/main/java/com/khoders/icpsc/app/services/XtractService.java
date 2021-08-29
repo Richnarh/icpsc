@@ -5,11 +5,15 @@
  */
 package com.khoders.icpsc.app.services;
 
-import com.khoders.icpsc.app.entities.Cart;
-import com.khoders.icpsc.app.entities.dto.PosReceipt;
+import com.khoders.icpsc.entities.Cart;
+import com.khoders.icpsc.app.dto.CartDto;
+import com.khoders.icpsc.app.dto.PosReceipt;
 import com.khoders.icpsc.app.listener.AppSession;
+import com.khoders.resource.fluent.Builder;
+import com.khoders.resource.utilities.DateRangeUtil;
 import com.khoders.resource.utilities.SystemUtils;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -23,19 +27,19 @@ import javax.inject.Inject;
 public class XtractService
 {
   @Inject private AppSession appSession;
+  @Inject private PosService posService;
   
     public PosReceipt extractToPosReceipt(List<Cart> cartList, PosReceipt posReceipt)
     {
-        System.out.println("Cart size => "+cartList.size());
         double receiptTotal = 0.0;
         try 
         {
             List<PosReceipt.InvoiceItem> invoiceItemsList = new LinkedList<>();
             if(appSession.getCurrentUser() != null)
             {
-                if(appSession.getCurrentUser().getBranch() != null)
+                if(appSession.getCurrentUser().getCompanyBranch() != null)
                 {
-                    posReceipt.setBranchName(appSession.getCurrentUser().getBranch().getBranchName());
+                    posReceipt.setBranchName(appSession.getCurrentUser().getCompanyBranch().getBranchName());
                 }
             }
             posReceipt.setBranchName("ICPSC - Lapaz Branch");
@@ -70,5 +74,48 @@ public class XtractService
         }
         
         return null;
+    }
+    
+    public List<CartDto> extractToCart(DateRangeUtil dateRange)
+    {
+        List<CartDto> cartDtoList = new LinkedList<>();
+        List<Cart> cartList = new LinkedList<>();
+        try
+        {
+           CartDto cartDto=null;
+           cartList = posService.getTransactionByDates(dateRange);
+            for (Cart cart : cartList)
+            {
+                cartDto = new CartDto();
+                cartDto.setCartItemId(cart.getCartItemId());
+                cartDto.setCustomerPhone(cart.getCustomerPhone());
+                cartDto.setQuantity(cart.getQuantity());
+                cartDto.setUnitPrice(cart.getUnitPrice());
+                cartDto.setValueDate(cart.getValueDate());
+                cartDto.setDescription(cart.getDescription());  
+                
+                if(cart.getInventoryItem() != null)
+                {
+                    if(cart.getInventoryItem().getProduct() != null)
+                    {
+                       cartDto.setProduct(cart.getInventoryItem().getProduct().getProductName()); 
+                    }
+                }
+                if(appSession.getCurrentUser().getCompanyBranch() != null)
+                {
+                   cartDto.setCompanyName("ICPSC - "+appSession.getCurrentUser().getCompanyBranch().getBranchName());
+                }
+            }
+                cartDtoList.add(cartDto);
+            
+            
+           return cartDtoList;
+           
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return Collections.emptyList();
     }
 }

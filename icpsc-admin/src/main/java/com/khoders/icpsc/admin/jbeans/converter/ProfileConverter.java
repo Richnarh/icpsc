@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.admin.jbeans.converter;
 
-import com.khoders.icpsc.entities.Profile;
+import com.khoders.icpsc.entities.CompanyProfile;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
@@ -15,7 +15,7 @@ import org.omnifaces.converter.SelectItemsConverter;
  *
  * @author richa
  */
-@FacesConverter(forClass = Profile.class)
+@FacesConverter(forClass = CompanyProfile.class)
 public class ProfileConverter extends SelectItemsConverter
 {
     @Override
@@ -25,6 +25,6 @@ public class ProfileConverter extends SelectItemsConverter
         {
             return null;
         }
-        return ((Profile) value).getId();
+        return ((CompanyProfile) value).getId();
     }
 }

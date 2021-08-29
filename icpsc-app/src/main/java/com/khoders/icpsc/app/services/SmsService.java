@@ -5,12 +5,12 @@
  */
 package com.khoders.icpsc.app.services;
 
-import com.khoders.icpsc.app.entities.Customer;
-import com.khoders.icpsc.app.entities.sms.GroupContact;
-import com.khoders.icpsc.app.entities.sms.MessageTemplate;
-import com.khoders.icpsc.app.entities.sms.SMSGrup;
-import com.khoders.icpsc.app.entities.sms.SenderId;
-import com.khoders.icpsc.app.entities.sms.Sms;
+import com.khoders.icpsc.entities.Customer;
+import com.khoders.icpsc.entities.sms.GroupContact;
+import com.khoders.icpsc.entities.sms.MessageTemplate;
+import com.khoders.icpsc.entities.sms.SMSGrup;
+import com.khoders.icpsc.entities.sms.SenderId;
+import com.khoders.icpsc.entities.sms.Sms;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.resource.jpa.CrudApi;
 import java.io.IOException;

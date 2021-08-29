@@ -5,11 +5,11 @@
  */
 package com.khoders.icpsc.app.commons;
 
-import com.khoders.icpsc.app.entities.Customer;
-import com.khoders.icpsc.app.entities.ItemType;
-import com.khoders.icpsc.app.entities.Product;
-import com.khoders.icpsc.app.entities.sms.MessageTemplate;
-import com.khoders.icpsc.app.entities.sms.SenderId;
+import com.khoders.icpsc.entities.Customer;
+import com.khoders.icpsc.entities.ItemType;
+import com.khoders.icpsc.entities.Product;
+import com.khoders.icpsc.entities.sms.MessageTemplate;
+import com.khoders.icpsc.entities.sms.SenderId;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.icpsc.app.services.SmsService;
 import com.khoders.resource.jpa.CrudApi;

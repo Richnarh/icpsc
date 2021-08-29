@@ -5,8 +5,8 @@
  */
 package com.khoders.icpsc.app.jbeans.controller;
 
-import com.khoders.icpsc.app.entities.Cart;
-import com.khoders.icpsc.app.entities.SalesCatalogue;
+import com.khoders.icpsc.entities.Cart;
+import com.khoders.icpsc.entities.SalesCatalogue;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.icpsc.app.services.SalesService;
@@ -53,7 +53,6 @@ public class SalesLogController implements Serializable{
     
     public void profitPerMonth()
     {
-        
         cartList = salesService.getCartList(dateRange);
         
         totalProfitSum = cartList.stream().mapToDouble(Cart::getProfit).sum();

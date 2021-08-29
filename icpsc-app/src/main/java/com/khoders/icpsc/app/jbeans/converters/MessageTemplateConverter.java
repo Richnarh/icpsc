@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.app.jbeans.converters;
 
-import com.khoders.icpsc.app.entities.sms.MessageTemplate;
+import com.khoders.icpsc.entities.sms.MessageTemplate;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;

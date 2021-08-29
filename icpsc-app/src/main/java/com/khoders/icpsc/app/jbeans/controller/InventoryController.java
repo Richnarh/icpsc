@@ -5,10 +5,8 @@
  */
 package com.khoders.icpsc.app.jbeans.controller;
 
-import com.khoders.icpsc.app.entities.Inventory;
-import com.khoders.icpsc.app.entities.InventoryItem;
-import com.khoders.icpsc.app.entities.Inventory;
-import com.khoders.icpsc.app.entities.InventoryItem;
+import com.khoders.icpsc.entities.Inventory;
+import com.khoders.icpsc.entities.InventoryItem;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.resource.jpa.CrudApi;
@@ -179,6 +177,7 @@ public class InventoryController implements Serializable
 //                        return;
 //                }
                 orderItem.genCode();
+                
                 crudApi.save(orderItem);
             }
 
@@ -224,6 +223,7 @@ public class InventoryController implements Serializable
     {
         inventory = new Inventory();
         inventory.setUserAccount(appSession.getCurrentUser());
+        inventory.setCompanyBranch(appSession.getCompanyBranch());
         optionText = "Save Changes";
         SystemUtils.resetJsfUI();
     }
@@ -240,6 +240,7 @@ public class InventoryController implements Serializable
         optionText = "Save Changes";
         inventoryItem.setInventory(inventory);
         inventoryItem.setUserAccount(appSession.getCurrentUser());
+        inventoryItem.setCompanyBranch(appSession.getCompanyBranch());
         SystemUtils.resetJsfUI();
     }
     

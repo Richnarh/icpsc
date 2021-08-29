@@ -5,11 +5,10 @@
  */
 package com.khoders.icpsc.app.jbeans.controller;
 
-import com.khoders.icpsc.app.entities.Product;
-import com.khoders.icpsc.app.entities.PurchaseOrder;
-import com.khoders.icpsc.app.entities.PurchaseOrderItem;
+import com.khoders.icpsc.entities.Product;
+import com.khoders.icpsc.entities.PurchaseOrder;
+import com.khoders.icpsc.entities.PurchaseOrderItem;
 import com.khoders.icpsc.app.listener.AppSession;
-import com.khoders.resource.enums.FileExtension;
 import com.khoders.resource.jpa.CrudApi;
 import com.khoders.resource.utilities.Msg;
 import com.khoders.resource.utilities.NumberUtil;
@@ -123,6 +122,7 @@ public class PurchaseOrderUploadController implements Serializable
                purchaseOrderItemList.forEach(order ->{
                 order.genCode();
                 order.setUserAccount(appSession.getCurrentUser());
+                order.setCompanyBranch(appSession.getCompanyBranch());
                 order.setPurchaseOrder(purchaseOrder);
                 crudApi.save(order);
             }); 

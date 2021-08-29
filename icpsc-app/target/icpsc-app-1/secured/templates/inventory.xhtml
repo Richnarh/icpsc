@@ -34,9 +34,14 @@
                                 </div>
                                 <p:growl/>
                                 <h:form id="inventoryTable" class="mb-3 wow">
-                                    <p:dataTable value="#{inventoryController.inventoryList}" reflow="true" var="inventory"
+                                    
+                                <h:commandButton class="btn btn-sm btn-info" value="Export to Excel" rendered="#{!empty inventoryController.inventoryList}">
+                                    <p:dataExporter target="inventoryTable:stockTable" type="xlsx" fileName="current-inventory"/>
+                                </h:commandButton>
+                                    
+                                    <p:dataTable id="stockTable" value="#{inventoryController.inventoryList}" reflow="true" var="inventory"
                                                  scrollable="true" scrollHeight="400">
-                                        <p:column style="width: 37px;">
+                                        <p:column exportable="false" style="width: 37px;">
                                             <p:rowToggler/>
                                         </p:column>
 
@@ -46,9 +51,6 @@
                                                 <h:outputText value="#{inventory.createdDate}">
                                                     <f:convertDateTime pattern="#{msg.formatted_date}" type="localDate"/>
                                                 </h:outputText>
-                                                
-                                                <span>#{msg.customer}</span>
-                                                <h:outputText value="#{inventory.customer.customerName}"/>
                                                 
                                                 <span>#{msg.description}</span>
                                                 <h:outputText value="#{inventory.description}"/>
@@ -61,12 +63,16 @@
                                             </h:outputText>
                                         </p:column>
 
-                                        <p:column headerText="Order code" filterBy="#{inventory.orderId}" filterMatchMode="contains">
-                                            #{inventory.orderId}
+                                        <p:column headerText="Inventory code" filterBy="#{inventory.orderId}" filterMatchMode="contains">
+                                            <h:outputText value="#{inventory.orderId}"/>
+                                        </p:column>
+
+                                        <p:column headerText="#{msg.customer}">
+                                            <h:outputText value="#{inventory.customer.customerName}"/>
                                         </p:column>
 
                                         <p:column headerText="#{msg.batch_number}">
-                                            #{inventory.batchNumber}
+                                            <h:outputText value="#{inventory.batchNumber}"/>
                                         </p:column>
 
                                         <p:column headerText="#{msg.total_amount}" class="text-right">

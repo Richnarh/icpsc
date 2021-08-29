@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.app.jbeans.controller;
 
-import com.khoders.icpsc.app.entities.Cart;
+import com.khoders.icpsc.entities.Cart;
 import com.khoders.icpsc.app.services.PosService;
 import java.io.Serializable;
 import java.util.LinkedList;

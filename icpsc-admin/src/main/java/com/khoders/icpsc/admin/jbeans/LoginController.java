@@ -117,6 +117,12 @@ public class LoginController implements Serializable
         }
         return null;
     }
+    
+    public void login(UserAccount userAccount)
+    {
+        
+            Faces.redirect("http://localhost:8080/icpsc-app/access.xhtml?id="+userAccount.getId());
+    }
   
     public String getUserEmail()
     {

@@ -23,7 +23,7 @@ import javax.persistence.Transient;
 public class UserAccount extends BaseModel implements Serializable{
   @JoinColumn(name = "company_branch", referencedColumnName = "id")
   @ManyToOne
-  private Branch branch;
+  private CompanyBranch companyBranch;
   
   @Column(name = "shop_name")
   private String shopName;
@@ -215,14 +215,14 @@ public class UserAccount extends BaseModel implements Serializable{
         this.permSendSMS = permSendSMS;
     }
 
-    public Branch getBranch()
+    public CompanyBranch getCompanyBranch()
     {
-        return branch;
+        return companyBranch;
     }
 
-    public void setBranch(Branch branch)
+    public void setCompanyBranch(CompanyBranch companyBranch)
     {
-        this.branch = branch;
+        this.companyBranch = companyBranch;
     }
 
     public Status getStatus()

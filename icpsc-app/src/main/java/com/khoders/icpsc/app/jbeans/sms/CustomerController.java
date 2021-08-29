@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.app.jbeans.sms;
 
-import com.khoders.icpsc.app.entities.Customer;
+import com.khoders.icpsc.entities.Customer;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.resource.jpa.CrudApi;

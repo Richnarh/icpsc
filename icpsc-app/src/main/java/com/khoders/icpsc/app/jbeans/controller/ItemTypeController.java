@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.app.jbeans.controller;
 
-import com.khoders.icpsc.app.entities.ItemType;
+import com.khoders.icpsc.entities.ItemType;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.resource.jpa.CrudApi;
@@ -98,6 +98,7 @@ public class ItemTypeController implements Serializable{
     {
         itemType = new ItemType();
         itemType.setUserAccount(appSession.getCurrentUser());
+        itemType.setCompanyBranch(appSession.getCompanyBranch());
         optionText = "Save";
         SystemUtils.resetJsfUI();
     }

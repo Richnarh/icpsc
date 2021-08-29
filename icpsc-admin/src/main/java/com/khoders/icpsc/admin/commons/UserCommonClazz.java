@@ -6,8 +6,8 @@
 package com.khoders.icpsc.admin.commons;
 
 import com.khoders.icpsc.admin.services.CompanyService;
-import com.khoders.icpsc.entities.Branch;
-import com.khoders.icpsc.entities.Profile;
+import com.khoders.icpsc.entities.CompanyBranch;
+import com.khoders.icpsc.entities.CompanyProfile;
 import com.khoders.resource.jpa.CrudApi;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -28,24 +28,24 @@ public class UserCommonClazz implements Serializable
    @Inject private CrudApi crudApi;
    @Inject private CompanyService companyService;
    
-   private List<Branch> branchList = new LinkedList<>();
-   private List<Profile> profileList = new LinkedList<>();
+   private List<CompanyBranch> companyBranchList = new LinkedList<>();
+   private List<CompanyProfile> companyProfileList = new LinkedList<>();
    
    @PostConstruct
    public void init()
    {
-       branchList = companyService.getBranchList();
-       profileList = companyService.getProfileList();
+       companyBranchList = companyService.getCompanyBranchList();
+       companyProfileList = companyService.getCompanyProfileList();
    }
 
-    public List<Branch> getBranchList()
+    public List<CompanyBranch> getCompanyBranchList()
     {
-        return branchList;
+        return companyBranchList;
     }
 
-    public List<Profile> getProfileList()
+    public List<CompanyProfile> getCompanyProfileList()
     {
-        return profileList;
+        return companyProfileList;
     }
-   
+    
 }

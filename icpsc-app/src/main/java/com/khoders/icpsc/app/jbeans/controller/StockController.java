@@ -5,8 +5,7 @@
  */
 package com.khoders.icpsc.app.jbeans.controller;
 
-import com.khoders.icpsc.app.entities.Inventory;
-import com.khoders.icpsc.app.entities.InventoryItem;
+import com.khoders.icpsc.entities.InventoryItem;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.resource.jpa.CrudApi;

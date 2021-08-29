@@ -3,16 +3,27 @@
   <!-- Define Persistence Unit -->
   <persistence-unit name="icpscPU" transaction-type="JTA">
     <jta-data-source>jdbc/icpsc</jta-data-source>
-    <class>com.khoders.icpsc.entities.UserAccount</class>
-    <class>com.khoders.icpsc.entities.UserPermissions</class>
-    <class>com.khoders.icpsc.entities.Branch</class>
-    <class>com.khoders.icpsc.entities.Profile</class>
     <class>com.khoders.icpsc.entities.Cart</class>
-    <class>com.khoders.icpsc.entities.SalesCatalogue</class>
+    <class>com.khoders.icpsc.entities.Category</class>
+    <class>com.khoders.icpsc.entities.CompanyBranch</class>
+    <class>com.khoders.icpsc.entities.CompanyProfile</class>
     <class>com.khoders.icpsc.entities.Customer</class>
+    <class>com.khoders.icpsc.entities.Inventory</class>
     <class>com.khoders.icpsc.entities.InventoryItem</class>
     <class>com.khoders.icpsc.entities.ItemType</class>
+    <class>com.khoders.icpsc.entities.PettyTransaction</class>
+    <class>com.khoders.icpsc.entities.PettyTransactionItem</class>
     <class>com.khoders.icpsc.entities.Product</class>
+    <class>com.khoders.icpsc.entities.PurchaseOrder</class>
+    <class>com.khoders.icpsc.entities.PurchaseOrderItem</class>
+    <class>com.khoders.icpsc.entities.SalesCatalogue</class>
+    <class>com.khoders.icpsc.entities.UserAccount</class>
+    <class>com.khoders.icpsc.entities.UserPermissions</class>
+    <class>com.khoders.icpsc.entities.sms.GroupContact</class>
+    <class>com.khoders.icpsc.entities.sms.MessageTemplate</class>
+    <class>com.khoders.icpsc.entities.sms.SMSGrup</class>
+    <class>com.khoders.icpsc.entities.sms.SenderId</class>
+    <class>com.khoders.icpsc.entities.sms.Sms</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

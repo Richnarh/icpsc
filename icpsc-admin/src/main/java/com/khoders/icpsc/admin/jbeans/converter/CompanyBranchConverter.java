@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.admin.jbeans.converter;
 
-import com.khoders.icpsc.entities.Branch;
+import com.khoders.icpsc.entities.CompanyBranch;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
@@ -15,7 +15,7 @@ import org.omnifaces.converter.SelectItemsConverter;
  *
  * @author richa
  */
-@FacesConverter(forClass = Branch.class)
+@FacesConverter(forClass = CompanyBranch.class)
 public class CompanyBranchConverter extends SelectItemsConverter
 {
     @Override
@@ -25,6 +25,6 @@ public class CompanyBranchConverter extends SelectItemsConverter
         {
             return null;
         }
-        return ((Branch) value).getId();
+        return ((CompanyBranch) value).getId();
     }
 }

@@ -53,12 +53,7 @@
                                             <h:commandButton class="btn btn-sm btn-info mx-2" value="#{msg.reset}" action="#{salesLogController.resetPage()}">
                                                 <p:ajax update="@form, :receiptTable"/>
                                             </h:commandButton>
-                                            
-                                            <h:commandButton class="btn btn-sm btn-info" value="Run Profit" action="#{salesLogController.profitPerMonth()}">
-                                                <p:ajax update="@form"/>
-                                            </h:commandButton>
-                                            
-                                            
+                                                                                        
                                         </span>
                                     </h5>
                                     <div class="card-body">
@@ -86,11 +81,6 @@
                                             </p:column>
                                         </p:dataTable>
                                           
-                                        <div class="field-shade">
-                                            <h:outputText class="text-right" style="font-size: 15px;" value="Profit for the searched period: #{salesLogController.totalProfitSum}">
-                                                    <f:convertNumber pattern="#{msg.money_pattern}"/>
-                                                </h:outputText>
-                                        </div>
                                     </div>
                                 </div>
                             </h:form>

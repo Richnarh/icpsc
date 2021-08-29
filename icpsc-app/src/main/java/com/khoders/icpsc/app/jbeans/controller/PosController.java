@@ -8,13 +8,13 @@ package com.khoders.icpsc.app.jbeans.controller;
 import Zenoph.SMSLib.Enums.MSGTYPE;
 import Zenoph.SMSLib.Enums.REQSTATUS;
 import Zenoph.SMSLib.ZenophSMS;
-import com.khoders.icpsc.app.entities.Cart;
-import com.khoders.icpsc.app.entities.Inventory;
-import com.khoders.icpsc.app.entities.InventoryItem;
-import com.khoders.icpsc.app.entities.Product;
-import com.khoders.icpsc.app.entities.SalesCatalogue;
-import com.khoders.icpsc.app.entities.dto.PosReceipt;
-import com.khoders.icpsc.app.entities.sms.Sms;
+import com.khoders.icpsc.entities.Cart;
+import com.khoders.icpsc.entities.Inventory;
+import com.khoders.icpsc.entities.InventoryItem;
+import com.khoders.icpsc.entities.Product;
+import com.khoders.icpsc.entities.SalesCatalogue;
+import com.khoders.icpsc.app.dto.PosReceipt;
+import com.khoders.icpsc.entities.sms.Sms;
 import com.khoders.icpsc.app.jbeans.ReportFiles;
 import com.khoders.icpsc.app.jbeans.SmsAccess;
 import com.khoders.icpsc.app.listener.AppSession;
@@ -79,16 +79,6 @@ public class PosController implements Serializable
     {
         clear();
         inventoryItemList = inventoryService.getInventoryItemList();
-
-    }
-    
-    public void toggleFlag()
-    {
-       if(flagCustomer == true)
-       {
-           flagCustomer = false;
-       }
-       else flagCustomer = flagCustomer == false;
     }
 
     public void selectProduct(Product product)
@@ -345,6 +335,7 @@ public class PosController implements Serializable
     {
         cart = new Cart();
         cart.setUserAccount(appSession.getCurrentUser());
+        cart.setCompanyBranch(appSession.getCompanyBranch());
         cartList = new LinkedList<>();
         totalAmount = 0.0;
     }

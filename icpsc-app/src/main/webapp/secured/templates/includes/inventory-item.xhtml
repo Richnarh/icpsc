@@ -96,7 +96,7 @@
                     <h:panelGrid columns="2">
                         <span>Total Amount</span>
                         <h:outputText value="#{inventoryController.totalAmount}" class="field-shade">
-                            <f:convertNumber pattern="#{appSession.currentUser.branch.profile.currency} #{msg.money_pattern}"/>
+                            <f:convertNumber pattern="#{appSession.currentUser.companyBranch.companyProfile.currency} #{msg.money_pattern}"/>
                         </h:outputText>
                     </h:panelGrid>
                 </center>

@@ -5,10 +5,10 @@
  */
 package com.khoders.icpsc.app.jbeans.controller;
 
-import com.khoders.icpsc.app.entities.Cart;
-import com.khoders.icpsc.app.entities.InventoryItem;
-import com.khoders.icpsc.app.entities.Product;
-import com.khoders.icpsc.app.entities.dto.PosReceipt;
+import com.khoders.icpsc.entities.Cart;
+import com.khoders.icpsc.entities.InventoryItem;
+import com.khoders.icpsc.entities.Product;
+import com.khoders.icpsc.app.dto.PosReceipt;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.resource.jpa.CrudApi;
@@ -105,6 +105,7 @@ public class ProductController implements Serializable{
     public void clearProduct() {
         product = new Product();
         product.setUserAccount(appSession.getCurrentUser());
+        product.setCompanyBranch(appSession.getCompanyBranch());
         optionText = "Save Changes";
         SystemUtils.resetJsfUI();
     }

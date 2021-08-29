@@ -16,5 +16,6 @@ public class ReportFiles
     
     public static final String LOGO = LOGO_DIR+"logo.png";
     public static final String RECEIPT_FILE = BASE_DIR+"receipt.jasper";
+    public static final String SALES_REPORT = BASE_DIR+"sales_reports.jasper";
     
 }

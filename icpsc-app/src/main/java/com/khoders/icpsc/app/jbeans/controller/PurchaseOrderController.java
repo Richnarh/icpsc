@@ -5,10 +5,10 @@
  */
 package com.khoders.icpsc.app.jbeans.controller;
 
-import com.khoders.icpsc.app.entities.Inventory;
-import com.khoders.icpsc.app.entities.InventoryItem;
-import com.khoders.icpsc.app.entities.PurchaseOrder;
-import com.khoders.icpsc.app.entities.PurchaseOrderItem;
+import com.khoders.icpsc.entities.Inventory;
+import com.khoders.icpsc.entities.InventoryItem;
+import com.khoders.icpsc.entities.PurchaseOrder;
+import com.khoders.icpsc.entities.PurchaseOrderItem;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.InventoryService;
 import com.khoders.resource.jpa.CrudApi;
@@ -295,6 +295,7 @@ public class PurchaseOrderController implements Serializable
     {
         purchaseOrder = new PurchaseOrder();
         purchaseOrder.setUserAccount(appSession.getCurrentUser());
+        purchaseOrder.setCompanyBranch(appSession.getCompanyBranch());
         optionText = "Save Changes";
         SystemUtils.resetJsfUI();
     }

@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.app.jbeans.converters;
 
-import com.khoders.icpsc.app.entities.Product;
+import com.khoders.icpsc.entities.Product;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;

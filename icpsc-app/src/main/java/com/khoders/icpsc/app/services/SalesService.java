@@ -5,19 +5,15 @@
  */
 package com.khoders.icpsc.app.services;
 
-import com.khoders.icpsc.app.entities.Cart;
-import com.khoders.icpsc.app.entities.SalesCatalogue;
+import com.khoders.icpsc.entities.Cart;
+import com.khoders.icpsc.entities.SalesCatalogue;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.resource.jpa.CrudApi;
 import com.khoders.resource.utilities.DateRangeUtil;
-import com.khoders.resource.utilities.Msg;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -35,7 +31,7 @@ public class SalesService
         try 
         {  
             if(dateRange.getFromDate() == null || dateRange.getToDate() == null)
-                {
+            {
                   String  query = "SELECT e FROM SalesCatalogue e WHERE e.userAccount=?1";
                   TypedQuery<SalesCatalogue> typedQuery = crudApi.getEm().createQuery(query, SalesCatalogue.class)
                           .setParameter(1, appSession.getCurrentUser());

@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.app.jbeans.sms;
 
-import com.khoders.icpsc.app.entities.sms.SMSGrup;
+import com.khoders.icpsc.entities.sms.SMSGrup;
 import com.khoders.icpsc.app.listener.AppSession;
 import com.khoders.icpsc.app.services.SmsService;
 import com.khoders.resource.jpa.CrudApi;

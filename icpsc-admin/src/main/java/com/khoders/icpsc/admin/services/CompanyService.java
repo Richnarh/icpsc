@@ -5,8 +5,8 @@
  */
 package com.khoders.icpsc.admin.services;
 
-import com.khoders.icpsc.entities.Branch;
-import com.khoders.icpsc.entities.Profile;
+import com.khoders.icpsc.entities.CompanyBranch;
+import com.khoders.icpsc.entities.CompanyProfile;
 import com.khoders.resource.jpa.CrudApi;
 import java.util.Collections;
 import java.util.List;
@@ -22,11 +22,11 @@ public class CompanyService
 {
     @Inject private CrudApi crudApi;
     
-   public List<Profile> getProfileList()
+   public List<CompanyProfile> getCompanyProfileList()
     {
         try
         {
-            return crudApi.getEm().createQuery("SELECT e FROM Profile e", Profile.class).getResultList();
+            return crudApi.getEm().createQuery("SELECT e FROM CompanyProfile e", CompanyProfile.class).getResultList();
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -35,11 +35,11 @@ public class CompanyService
         return Collections.emptyList();
     }
 
-    public List<Branch> getBranchList()
+    public List<CompanyBranch> getCompanyBranchList()
     {
         try
         {
-            return crudApi.getEm().createQuery("SELECT e FROM Branch e ORDER BY e.branchName ASC", Branch.class).getResultList();
+            return crudApi.getEm().createQuery("SELECT e FROM CompanyBranch e ORDER BY e.branchName ASC", CompanyBranch.class).getResultList();
         } catch (Exception e)
         {
             e.printStackTrace();

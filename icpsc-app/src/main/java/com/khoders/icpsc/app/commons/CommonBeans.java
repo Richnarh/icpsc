@@ -5,7 +5,7 @@
  */
 package com.khoders.icpsc.app.commons;
 
-import com.khoders.icpsc.app.entities.enums.MessagingType;
+import com.khoders.icpsc.entities.enums.MessagingType;
 import com.khoders.resource.enums.UnitsOfQuantity;
 import java.io.Serializable;
 import java.util.Arrays;

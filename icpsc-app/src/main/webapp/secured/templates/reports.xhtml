@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">  
+
+    <h:body>
+        <ui:composition template="../templatesUI.xhtml">
+            <ui:define name="pageTitle">
+                Reports
+            </ui:define>
+
+            <ui:define name="pageContent">
+                <div class="col-md-12">
+                    <div class="card card-outline primary">
+                        <div class="card-header">Reports</div>
+                        <div class="card-body">
+                            <h:form id="receiptTable">
+                                <h:panelGrid class="spaced-form" columns="4">
+                                    <span>From: </span>
+                                    <p:datePicker value="#{reportController.dateRange.fromDate}"
+                                                  pattern="#{msg.formatted_date}" 
+                                                  monthNavigator="true" yearNavigator="true" />
+
+                                    <span>To:</span>
+                                    <p:datePicker value="#{reportController.dateRange.toDate}"
+                                                  pattern="#{msg.formatted_date}" 
+                                                  monthNavigator="true" yearNavigator="true" />
+                                </h:panelGrid>
+
+                                <h:commandLink class="ptext-link" target="_blank"
+                                                 action="#{reportController.generateSalesReport()}"
+                                                 value="Print Sales Report" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
