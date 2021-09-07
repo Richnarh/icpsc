@@ -9,6 +9,7 @@ import com.khoders.resource.enums.UnitOfMeasurement;
 import com.khoders.resource.utilities.SystemUtils;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -172,7 +173,6 @@ public class InventoryItem extends UserAccountRecord implements Serializable
     {
         this.expiryDate = expiryDate;
     }
-     
     
     public void genCode()
     {

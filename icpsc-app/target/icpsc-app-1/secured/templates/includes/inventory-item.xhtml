@@ -25,6 +25,9 @@
                     <span>Selling Price <span class="text-danger">*</span> </span>
                     <p:inputText value="#{inventoryController.inventoryItem.sellingPrice}" required="true"/>
 
+                    <span>Expired Date</span>
+                    <p:datePicker pattern="#{msg.formated_yr_mnt}" view="month" yearNavigator="true" value="#{inventoryController.inventoryItem.expiryDate}" yearRange="#{msg.year_range}"/>
+
                 </h:panelGrid>
 
                 <div class="py-3">
@@ -47,9 +50,9 @@
                             <span>Item ID</span>
                             <h:outputText value="#{inventoryItem.orderItemId}"/>
                             
-                            <span>#{msg.unit_price}</span>
-                            <h:outputText value="#{inventoryItem.sellingPrice}">
-                                <f:convertNumber pattern="#{msg.money_pattern}"/>
+                            <span>Expired Date</span>
+                            <h:outputText value="#{inventoryItem.expiryDate}">
+                                <f:convertDateTime pattern="#{msg.formated_yr_mnt}" type="localDate"/>
                             </h:outputText>
                         </p:panelGrid>
                     </p:rowExpansion>
