@@ -15,9 +15,13 @@ import com.khoders.icpsc.services.InventoryService;
 import com.khoders.icpsc.services.SmsService;
 import com.khoders.icpsc.services.UserAccountService;
 import com.khoders.icpsc.entities.InventoryItem;
+import com.khoders.icpsc.entities.enums.SMSType;
+import com.khoders.icpsc.entities.sms.Sms;
+import com.khoders.resource.jpa.CrudApi;
 import com.khoders.resource.utilities.DateRangeUtil;
 import com.khoders.resource.utilities.Msg;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -39,6 +43,7 @@ public class LoginController implements Serializable
     @Inject private UserAccountService userAccountService;
     @Inject private InventoryService inventoryService;
     @Inject private SmsService smsService;
+    @Inject private CrudApi crudApi;
     
     private List<InventoryItem> expiredInventoryList = new LinkedList<>();
     
@@ -56,7 +61,7 @@ public class LoginController implements Serializable
        
        if(expiredInventoryList.size() > 0)
        {
-           
+           processExpiredInventoryViaSMS();
        }
     }
     
@@ -124,10 +129,10 @@ public class LoginController implements Serializable
         return null;
     }
  
-    public void processReceiptSMS()
+    public void processExpiredInventoryViaSMS()
     {
-//       expiredProductLink = "http://localhost:8080/icpsc-app/expired-product.xhtml?id=";    
-       expiredProductLink = "http://209.145.49.185:8080/icpsc/expired-product.xhtml?id=";    
+       expiredProductLink = "http://localhost:8080/icpsc-app/expired-product.xhtml?id=";    
+//       expiredProductLink = "http://209.145.49.185:8080/icpsc/expired-product.xhtml?id=";    
         try 
         {
 
@@ -138,16 +143,16 @@ public class LoginController implements Serializable
             String phoneNumber;
             if(appSession.getCompanyBranch().getTelephoneNo() != null)
             {
-                System.out.println("Phone number => "+appSession.getCurrentUser().getPhoneNumber());
-                zsms.setMessage("Please click the link below to view expired product details: \n\n"+expiredProductLink+appSession.getCompanyBranch());
+                System.out.println("Phone number => "+appSession.getCompanyBranch().getTelephoneNo());
+                zsms.setMessage("Please click the link below to view expired inventory details: \n\n"+expiredProductLink+appSession.getCompanyBranch().getTelephoneNo());
                 phoneNumber = appSession.getCompanyBranch().getTelephoneNo();
                 
-                System.out.println("Please click the link below to view expired product details: \n\n"+expiredProductLink+appSession.getCompanyBranch());
+                System.out.println("Please click the link below to view expired inventory details: \n\n"+expiredProductLink+appSession.getCompanyBranch().getTelephoneNo());
             }
             else
             {
                 FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("Please update your profile with phone number tor receive messages"), null));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("Please update your profile with phone number to receive sms messages"), null));
                 return;
             }
             
@@ -158,7 +163,7 @@ public class LoginController implements Serializable
                 zsms.addRecipient(number);
             }
 
-            zsms.setSenderId("ICPSC-SYS");
+            zsms.setSenderId("ICPSC_CHEM");
 
             List<String[]> response = zsms.submit();
             for (String[] destination : response)
@@ -175,8 +180,8 @@ public class LoginController implements Serializable
                     {
                         case SUCCESS:
                             FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("Message sent"), null));
-//                                saveMessage();
+                            new FacesMessage(FacesMessage.SEVERITY_INFO, Msg.setMsg("Message sent"), null));
+                                saveMessage();
                             break;
                         case ERR_INSUFF_CREDIT:
                             FacesContext.getCurrentInstance().addMessage(null,
@@ -200,6 +205,32 @@ public class LoginController implements Serializable
             e.printStackTrace();
         }
     }
+    
+    public void saveMessage()
+    {
+        
+        Sms sms = new Sms();
+        
+        try
+        {
+            sms.setSmsTime(LocalDateTime.now());
+            sms.setMessage("Please click the link below to view expired Inventory details: "+expiredProductLink+appSession.getCompanyBranch().getTelephoneNo());
+            sms.setMobileNo(appSession.getCompanyBranch().getTelephoneNo());
+            sms.setsMSType(SMSType.SINGLE_SMS);
+            sms.setUserAccount(appSession.getCurrentUser());
+           if(crudApi.save(sms) != null)
+           {
+               FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, Msg.setMsg("SMS sent to "+appSession.getCompanyBranch().getTelephoneNo()), null));
+               
+               System.out.println("SMS sent and saved -- ");
+           }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
     
     public String getUserEmail() {
         return userEmail;

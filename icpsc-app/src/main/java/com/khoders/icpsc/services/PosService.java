@@ -46,12 +46,11 @@ public class PosService
     
     public List<Cart> getClientReceipt(String id)
     {
-        String qryString = "SELECT e FROM Cart e WHERE e.customerPhone=?1 AND e.userAccount=?2";
+        String qryString = "SELECT e FROM Cart e WHERE e.customerPhone=?1";
         try 
         {
             TypedQuery<Cart> typedQuery = crudApi.getEm().createQuery(qryString, Cart.class);
                     typedQuery.setParameter(1, id);
-                    typedQuery.setParameter(2, appSession.getCurrentUser());
                     
                 return typedQuery.getResultList();
             

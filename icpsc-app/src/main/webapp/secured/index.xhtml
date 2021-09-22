@@ -14,66 +14,85 @@
                 <div class="row wow zoomIn">
                     <h:panelGroup rendered="#{expiredProductsController.expiredInventoryList.size() > 0}">
                         <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-info elevation-1"><i class="fa fa-folder-open-o"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Expired Products</span>
-                                <span class="info-box-number">
-                                    <a href="#{application.contextPath}/#{msg.inventory_uri}/expired-products.xhtml" target="_blank" class="ptext-link">
-                                        <i class="fa fa-check nav-icon"></i>
-                                        <span>(#{expiredProductsController.expiredInventoryList.size()})</span>
-                                    </a>
-                                </span>
+                            <div class="info-box">
+                                <span class="info-box-icon bg-info elevation-1"><i class="fa fa-folder-open-o"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Expired Products</span>
+                                    <span class="info-box-number">
+                                        <a href="#{application.contextPath}/#{msg.inventory_uri}/expired-products.xhtml" target="_blank" class="ptext-link">
+                                            <i class="fa fa-check nav-icon"></i>
+                                            <span>(#{expiredProductsController.expiredInventoryList.size()})</span>
+                                        </a>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </h:panelGroup>
-                    <!-- /.col -->
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3">
-                            <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-folder-open-o"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Folder</span>
-                                <span class="info-box-number">
-                                    242
-                                </span>
-                            </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-
-                    <!-- fix for small devices only -->
-                    <div class="clearfix hidden-md-up"></div>
-
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3">
-                            <span class="info-box-icon bg-success elevation-1"><i class="fa fa-money"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Money</span>
-                                <span class="info-box-number">
-                                    45
-                                </span>
+                    
+                    <center>
+                        <div class="card">
+                            <div class="card-header">System user guide</div>
+                            <div class="card-body">
+                                <p>At the moment the system has no pre-confiured data</p>
+                                <p>It is assumed the client of this system is going to be trained to use it, This is how to find your way around it.</p>
+                                <p>1. All dropped-downs without data will be user created records, the system is made very generic to cater for all kinds of user need
+                                   e.g customer, item type etc. it is adivices all these are first created
+                                </p>
+                                
+                                <p>2. Sender ID is required before SMS can be sent, set it up using the SMS Operations dropdown</p>
+                                <p>3. To be able to see expiry drugs list, the user have to intentially create expired product,
+                                i.e create a product with the expired date, some month or years before the current month</p>
                             </div>
                         </div>
-                    </div>
+                    </center>
                     <!-- /.col -->
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3">
-                            <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-bank"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text" title="Total amount on paid invoices">Bank Expense</span>
-                                <span class="info-box-number">
-                                    563
-                                </span>
+                    <ui:remove>
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-folder-open-o"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Folder</span>
+                                    <span class="info-box-number">
+                                        242
+                                    </span>
+                                </div>
+                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box-content -->
+                            <!-- /.info-box -->
                         </div>
-                        <!-- /.info-box -->
-                    </div>
+                        <!-- /.col -->
+
+                        <!-- fix for small devices only -->
+                        <div class="clearfix hidden-md-up"></div>
+
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-success elevation-1"><i class="fa fa-money"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Money</span>
+                                    <span class="info-box-number">
+                                        45
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-bank"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text" title="Total amount on paid invoices">Bank Expense</span>
+                                    <span class="info-box-number">
+                                        563
+                                    </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                    </ui:remove>
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->

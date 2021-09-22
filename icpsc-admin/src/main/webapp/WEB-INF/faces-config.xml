@@ -34,8 +34,8 @@
         </resource-bundle>
     </application>
     
-<!--    <lifecycle>
+    <lifecycle>
         <phase-listener>com.khoders.icpsc.admin.listener.SessionListener</phase-listener>
-    </lifecycle>-->
+    </lifecycle>
     
 </faces-config>

@@ -211,8 +211,8 @@ public class PosController implements Serializable
  
     public void processReceiptSMS()
     {
-//       receiptLink = "http://localhost:8080/icpsc-app/client-receipt.xhtml?id=";    
-       receiptLink = "http://209.145.49.185:8080/icpsc/client-receipt.xhtml?id=";    
+       receiptLink = "http://localhost:8080/icpsc-app/client-receipt.xhtml?id=";    
+//       receiptLink = "http://209.145.49.185:8080/icpsc/client-receipt.xhtml?id=";    
         try 
         {
 
@@ -243,7 +243,7 @@ public class PosController implements Serializable
                 zsms.addRecipient(number);
             }
 
-            zsms.setSenderId("ICPSC-SYS");
+            zsms.setSenderId("ICPSC_CHEM");
 
             List<String[]> response = zsms.submit();
             for (String[] destination : response)
@@ -260,16 +260,14 @@ public class PosController implements Serializable
                     {
                         case SUCCESS:
                             System.out.println("Message sent");
-                            FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("Message sent"), null));
-//                                saveMessage();
+//                            FacesContext.getCurrentInstance().addMessage(null,
+//                            new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("Message sent"), null));
+                                saveMessage();
                             break;
                         case ERR_INSUFF_CREDIT:
-                            System.out.println("I was here");
                             FacesContext.getCurrentInstance().addMessage(null,
                                     new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("Insufficeint Credit"), null));
                         default:
-                            System.out.println("I was at default");
                             FacesContext.getCurrentInstance().addMessage(null,
                                     new FacesMessage(FacesMessage.SEVERITY_ERROR, Msg.setMsg("Failed to send message"), null));
                             return;

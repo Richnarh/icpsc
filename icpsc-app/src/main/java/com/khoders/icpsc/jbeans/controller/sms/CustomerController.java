@@ -111,6 +111,7 @@ public class CustomerController implements Serializable{
     {
         customer = new Customer();
         customer.setUserAccount(appSession.getCurrentUser());
+        customer.setCompanyBranch(appSession.getCompanyBranch());
         optionText = "Save Changes";
         SystemUtils.resetJsfUI();
     }

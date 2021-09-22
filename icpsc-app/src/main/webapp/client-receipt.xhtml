@@ -16,10 +16,11 @@
     <h:body>
         <div class="container">
             <div class="col-md-6 mx-auto pt-5">
+                        <h5>Customer Transaction Details</h5>
                 <div class="card shadow">
                     <div class="card-body">
                         <!--                        <h:form>
-                                                    <h:commandButton value="Load Transaction" action="#{receiptViewController.fetchClientReceipt()}"/>
+                                                    <h:commandButton value="Load Transaction" action="{receiptViewController.fetchClientReceipt()}"/>
                                                 </h:form>-->
                         <table class="table table-striped table-responsive">
                             <thead>
@@ -44,11 +45,12 @@
                             </tbody>
                         </table>
                         <span class="float-right p-2 bg-gradient-info">
-                            Total payable: <span>#{receiptViewController.receiptTotal}</span>
+                            Total payable (GHS): <span>#{receiptViewController.receiptTotal}</span>
                         </span>
                     </div>
                 </div>
             </div>
+            <center><small>Thanks for shopping with us.!</small></center>
         </div>
     </h:body>
 </html>

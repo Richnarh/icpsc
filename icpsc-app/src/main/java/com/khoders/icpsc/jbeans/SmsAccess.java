@@ -11,8 +11,8 @@ package com.khoders.icpsc.jbeans;
  */
 public class SmsAccess
 {
-  public static  String USERNAME = "joseph";
-  public static  String PASSWORD = "joseph001";
+  public static  String USERNAME = "pascal";
+  public static  String PASSWORD = "pascal001";
 //  public static  String USERNAME = "aiaghana";
 //  public static  String PASSWORD = "654321abcd";
 //  public static  String USERNAME = "philips";

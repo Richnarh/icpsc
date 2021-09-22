@@ -39,6 +39,7 @@ com\khoders\icpsc\listener\AppSession.class
 com\khoders\icpsc\services\UserAccountService.class
 com\khoders\icpsc\services\SmsService.class
 com\khoders\icpsc\jbeans\controller\sms\SenderIdController.class
+com\khoders\icpsc\config\AppInint.class
 com\khoders\icpsc\dto\PosReceipt.class
 com\khoders\icpsc\jbeans\controller\ProfileUpdateController.class
 com\khoders\icpsc\jbeans\controller\sms\CustomerController.class
